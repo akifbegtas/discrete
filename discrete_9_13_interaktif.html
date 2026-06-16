@@ -529,6 +529,34 @@
       stroke-width: 2;
     }
 
+    .pdf-frame {
+      width: 100%;
+      min-height: 620px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      margin-top: 12px;
+    }
+
+    .answer-key {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .answer-key span {
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 8px 10px;
+      font-family: var(--mono);
+      min-width: 0;
+    }
+
     .tools-grid {
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -731,6 +759,14 @@
       .pair-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .answer-key {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .pdf-frame {
+        min-height: 460px;
+      }
     }
   </style>
 </head>
@@ -749,6 +785,7 @@
         <button class="nav-button" type="button" data-target="w11"><span>Grafik Temeli</span><span class="week">11</span></button>
         <button class="nav-button" type="button" data-target="w12"><span>Subgraph ve Bağlılık</span><span class="week">12</span></button>
         <button class="nav-button" type="button" data-target="w13"><span>Uygulamalar</span><span class="week">13</span></button>
+        <button class="nav-button" type="button" data-target="past"><span>Çıkmış Final</span><span class="week">2025</span></button>
         <button class="nav-button" type="button" data-target="labs"><span>Mini Araçlar</span><span class="week">Lab</span></button>
         <button class="nav-button" type="button" data-target="tests"><span>Testler</span><span class="week">Quiz</span></button>
       </nav>
@@ -1676,6 +1713,155 @@
         </div>
       </section>
 
+      <section id="past" class="module" data-title="çıkmış final 2024 2025 past exam solutions answer key discrete math">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Çıkmış Final</div>
+            <h2>Discrete Math Final 2024-2025</h2>
+            <p>Bu bölüm, gönderdiğin çıkmış final PDF’ini siteye ekler: orijinal PDF, okunabilen sorular için cevap anahtarı, kısa çözüm mantığı ve çıkmıştan mini test.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">25/05/2025</span>
+            <span class="pill">MC + short answer</span>
+            <span class="pill">cevaplı</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>Orijinal PDF</h3>
+            <p>Diyagramlı soruların şekilleri tarama olduğu için orijinal dosyayı da buraya koydum. Aşağıdaki cevaplarda görseli net okumak gereken Q14-Q15 için PDF’den kontrol notu bıraktım.</p>
+            <div class="tool-controls">
+              <a class="small-button primary" href="assets/discrete-final-2024-2025.pdf" target="_blank" rel="noopener">PDF’yi aç</a>
+              <a class="small-button" href="assets/discrete-final-2024-2025.pdf" download>PDF indir</a>
+            </div>
+            <iframe class="pdf-frame" src="assets/discrete-final-2024-2025.pdf" title="Discrete Math Final 2024-2025 PDF"></iframe>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Çıkmışın konu haritası</h3>
+            <p>Bu final sadece 9-13 değil, önceki ayrık matematik konularını da karıştırıyor. Soru dağılımı kabaca şöyle:</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Soru aralığı</th><th>Konu</th><th>Ne bilmen lazım?</th></tr></thead>
+                <tbody>
+                  <tr><td>Q1-Q5</td><td>Logic, function, composition</td><td>Truth values, range, function definition, composition.</td></tr>
+                  <tr><td>Q6-Q13</td><td>Counting, binomial</td><td>Product/sum rule, bit strings, passwords, inclusion-exclusion, binomial terms.</td></tr>
+                  <tr><td>Q14-Q24</td><td>Graph theory</td><td>Network representation, degree, graph types, isomorphism, planar regions, Hamiltonian path.</td></tr>
+                  <tr><td>Q30-Q36</td><td>Sequences, binomial coefficient, graph degree, BST, matching</td><td>Sigma notation, arithmetic sequence, handshaking lemma, binary search tree, bipartite matching.</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="warning">PDF tarama olduğu için Q25-Q29 bu dosyada görünmüyor; Q14-Q15 ise diyagramlı ve OCR ile güvenilir okunmuyor. Bu ikisini orijinal PDF görselinden kontrol ederek çalış.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>Çoktan seçmeli cevap anahtarı</h3>
+            <p>Güvenilir okunan sorular için kısa anahtar. Diyagramlı Q14-Q15’i bilerek “PDF’den kontrol” diye bıraktım.</p>
+            <div class="answer-key">
+              <span><strong>Q1</strong> b / 25</span>
+              <span><strong>Q2</strong> c</span>
+              <span><strong>Q3</strong> d</span>
+              <span><strong>Q4</strong> c</span>
+              <span><strong>Q5</strong> e</span>
+              <span><strong>Q6</strong> e / 4800</span>
+              <span><strong>Q7</strong> a / 335</span>
+              <span><strong>Q8</strong> 4^12</span>
+              <span><strong>Q9</strong> c</span>
+              <span><strong>Q10</strong> d</span>
+              <span><strong>Q11</strong> e</span>
+              <span><strong>Q12</strong> d</span>
+              <span><strong>Q13</strong> c / 11</span>
+              <span><strong>Q14</strong> PDF</span>
+              <span><strong>Q15</strong> PDF</span>
+              <span><strong>Q16</strong> e</span>
+              <span><strong>Q17</strong> d</span>
+              <span><strong>Q18</strong> a</span>
+              <span><strong>Q19</strong> b</span>
+              <span><strong>Q20</strong> b</span>
+              <span><strong>Q21</strong> c</span>
+              <span><strong>Q22</strong> e / 3</span>
+              <span><strong>Q23</strong> a</span>
+              <span><strong>Q24</strong> e</span>
+            </div>
+          </article>
+
+          <article class="example-card full">
+            <h3>Çoktan seçmeli kısa çözümler</h3>
+            <details open>
+              <summary>Q1-Q5: logic ve function</summary>
+              <div class="steps">
+                <div class="step"><strong>Q1:</strong> P true, Q true. P xor Q false olur; P and Q true olur. Flowchart bu kolda R=5 için S=R·R=25 verir.</div>
+                <div class="step"><strong>Q2:</strong> f(n)=2n-3, n integer ise sonuç hep odd integerdır. Range odd integers.</div>
+                <div class="step"><strong>Q3:</strong> g(5)=|(5-10)/3|=5/3. f(g(5))=|(5/3)/2|=5/6. Seçeneklerde yok, “None of these”.</div>
+                <div class="step"><strong>Q4:</strong> Inclusion-exclusion: n(A∪B)=n(A)+n(B)-n(A∩B).</div>
+                <div class="step"><strong>Q5:</strong> Codomain {1,...,6}. “Number of distinct letters” her 6 harfli string için 1 ile 6 arasında tanımlı olur. Diğerleri ya 0 verir, ya string döndürür, ya Z yoksa tanımsız kalır.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Q6-Q13: counting</summary>
+              <div class="steps">
+                <div class="step"><strong>Q6:</strong> Bir math ve bir CS temsilcisi: 15·320=4800.</div>
+                <div class="step"><strong>Q7:</strong> Ya math ya CS: 15+320=335.</div>
+                <div class="step"><strong>Q8:</strong> 12 farklı topun her biri 4 kutudan birini seçer: 4^12.</div>
+                <div class="step"><strong>Q9:</strong> Uzunluk 7 bit string’de 0 sayısı 1 sayısından fazla ise 0 sayısı 4,5,6,7 olur: C(7,4)+C(7,5)+C(7,6)+C(7,7).</div>
+                <div class="step"><strong>Q10:</strong> Tekrar yasağı verilmediği için 4 letter ve 3 digit: 26^4·10^3.</div>
+                <div class="step"><strong>Q11:</strong> Başta vowel veya sonda vowel: 2·6! + 2·6! - 2·5!.</div>
+                <div class="step"><strong>Q12:</strong> Tüm passwordlar 62^6. Hiç digit içermeyenler 52^6. En az bir digit: 62^6 - 52^6.</div>
+                <div class="step"><strong>Q13:</strong> (x+y)^10 açılımında terim sayısı 10+1=11.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Q16-Q24: graph theory</summary>
+              <div class="steps">
+                <div class="step"><strong>Q16:</strong> Bir vertex’e incident edge sayısı degree of vertex’tir.</div>
+                <div class="step"><strong>Q17:</strong> Scalar graph standart graph tipi değildir.</div>
+                <div class="step"><strong>Q18:</strong> Vertex/edge yapısı bire bir karşılık geliyorsa graphs isomorphic denir.</div>
+                <div class="step"><strong>Q19:</strong> Graph, vertices/nodes ve onları bağlayan edges yapısıdır.</div>
+                <div class="step"><strong>Q20:</strong> Strongly connected directed graph’ta her vertex’ten her vertex’e directed path vardır.</div>
+                <div class="step"><strong>Q21:</strong> Directed graph’ta toplam in-degree = |E| ve toplam out-degree = |E|. İkisini birlikte toplarsan 2|E|.</div>
+                <div class="step"><strong>Q22:</strong> Euler formula: V-E+R=2. R=2-V+E=2-6+7=3.</div>
+                <div class="step"><strong>Q23:</strong> Hamiltonian path her vertex’i tam bir kez ziyaret eder.</div>
+                <div class="step"><strong>Q24:</strong> Path length, path üzerindeki edge sayısıdır.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="example-card full">
+            <h3>Kısa cevaplar Q30-Q36</h3>
+            <details open>
+              <summary>Q30-Q32</summary>
+              <div class="steps">
+                <div class="step"><strong>Q30:</strong> 1+2+4+...+2^50 = Σ<sub>i=0</sub><sup>50</sup> 2^i.</div>
+                <div class="step"><strong>Q31:</strong> a<sub>n</sub>=6.5n-1 ise a1=5.5, a2=12, a3=18.5, a4=25. Fark sabit 6.5 olduğu için arithmetic sequence.</div>
+                <div class="step"><strong>Q32:</strong> (x^2 - 1/x)^100 içinde j tane (-1/x) seçilirse üs 200-3j olur. x^k katsayısı, k=200-3j ve 0≤j≤100 ise (-1)^j C(100,j), aksi halde 0. Burada j=(200-k)/3.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Q33-Q36</summary>
+              <div class="steps">
+                <div class="step"><strong>Q33:</strong> Handshaking: toplam degree 2·30=60. Bilinenler: 5 vertex degree4 ->20, 7 pendant ->7, 7 vertex degree2 ->14. Subtotal 41. Kalan 5 vertex degree3 veya4 ve toplam 19 degree vermeli. x tanesi degree4 ise 4x+3(5-x)=19, x=4. Toplam degree4 vertex = 5+4=9.</div>
+                <div class="step"><strong>Q34:</strong> BST insert sırası: 22 root; 8 sol, 27 sağ; 14, 8’in sağı; 17, 14’ün sağı; 3, 8’in solu; 9, 14’ün solu; 11, 9’un sağı; 35, 27’nin sağı.</div>
+                <div class="step"><strong>Q35:</strong> 15 vertex’in hepsi degree5 ise toplam degree 15·5=75 olur. Degree toplamı her zaman 2|E| olduğundan çift olmalı. 75 tek, bu yüzden simple graph exist edemez.</div>
+                <div class="step"><strong>Q36:</strong> Bir geçerli assignment: A -> networking, B -> software, C -> wireless, D -> hardware. Her çalışan nitelikli olduğu bir alana gider ve her alan bir kez kullanılır.</div>
+              </div>
+            </details>
+            <div class="formula">
+BST şekli:<br>
+22<br>
+├─ 8<br>
+│  ├─ 3<br>
+│  └─ 14<br>
+│     ├─ 9<br>
+│     │  └─ 11<br>
+│     └─ 17<br>
+└─ 27<br>
+   └─ 35
+            </div>
+          </article>
+        </div>
+      </section>
+
       <section id="labs" class="module" data-title="interactive labs relation function route weighted graph calculator">
         <div class="module-header">
           <div>
@@ -1764,6 +1950,7 @@
             <button class="nav-button quiz-tab" type="button" data-quiz="w11q"><span>Hafta 11</span><span class="week">8 soru</span></button>
             <button class="nav-button quiz-tab" type="button" data-quiz="w12q"><span>Hafta 12</span><span class="week">8 soru</span></button>
             <button class="nav-button quiz-tab" type="button" data-quiz="w13q"><span>Hafta 13</span><span class="week">8 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="pastq"><span>Çıkmış Final</span><span class="week">18 soru</span></button>
             <button class="nav-button quiz-tab" type="button" data-quiz="finalq"><span>Karma Final</span><span class="week">20 soru</span></button>
           </aside>
           <section class="quiz-card full">
@@ -2056,6 +2243,119 @@
             options: ["1", "2", "3", "4"],
             a: 0,
             exp: "x tek başına kaldırılınca graph iki parçaya ayrılır."
+          }
+        ]
+      },
+      pastq: {
+        title: "Çıkmış Final 2024-2025 Quiz",
+        questions: [
+          {
+            q: "Çıkmış Q2: f: Z→R, f(n)=2n-3. Range nedir?",
+            options: ["Natural numbers", "All integers", "Odd integers", "Even integers"],
+            a: 2,
+            exp: "2n her zaman even, even-3 her zaman odd integerdır."
+          },
+          {
+            q: "Çıkmış Q3: f(x)=|x/2| ve g(x)=|(5-2x)/3| için (f∘g)(5) kaçtır?",
+            options: ["1", "-1", "0", "Seçeneklerde yok"],
+            a: 3,
+            exp: "g(5)=5/3, f(5/3)=5/6. Bu seçeneklerde yok."
+          },
+          {
+            q: "Çıkmış Q4: Inclusion-exclusion formülü hangisidir?",
+            options: ["n(A∪B)=n(A)+n(B)-n(A∩B)", "n(A∩B)=n(A)+n(B)", "n(A∪B)=n(A)+n(B)+n(A∩B)", "n(A∩B)=n(A∪B)-n(A)"],
+            a: 0,
+            exp: "İki setin birleşiminde ortak bölge iki kez sayıldığı için bir kez çıkarılır."
+          },
+          {
+            q: "Çıkmış Q6: 15 math major ve 320 CS major içinden birer temsilci seçme sayısı nedir?",
+            options: ["335", "345", "4800", "4850"],
+            a: 2,
+            exp: "Bir math seçimi 15 yol, bir CS seçimi 320 yol: 15·320=4800."
+          },
+          {
+            q: "Çıkmış Q7: Math veya CS olan tek temsilci seçme sayısı nedir?",
+            options: ["335", "4800", "4850", "5000"],
+            a: 0,
+            exp: "Kesişim yok denmiş. Sum rule: 15+320=335."
+          },
+          {
+            q: "Çıkmış Q8: 12 farklı top 4 numaralı kutuya, kutular boş kalabilir. Kaç dağıtım?",
+            options: ["12^4", "4^12", "C(12,4)", "P(12,4)"],
+            a: 1,
+            exp: "Her top bağımsız olarak 4 kutudan birini seçer: 4^12."
+          },
+          {
+            q: "Çıkmış Q9: Length 7 bit stringlerde 0 sayısı 1 sayısından fazlaysa hangi toplam gerekir?",
+            options: ["C(7,0)+C(7,1)+C(7,2)+C(7,3)", "C(7,4)+C(7,5)+C(7,6)+C(7,7)", "2^7", "7!"],
+            a: 1,
+            exp: "0 sayısı 4,5,6 veya 7 olmalı."
+          },
+          {
+            q: "Çıkmış Q10: 4 uppercase letter + 3 digit, tekrar yasağı yok. Kaç plaka?",
+            options: ["26·25·24·23·10·9·8", "26^4+10^3", "26^4·10^3", "C(26,4)C(10,3)"],
+            a: 2,
+            exp: "Tekrar yasağı yazmıyorsa her letter 26, her digit 10 seçenek verir."
+          },
+          {
+            q: "Çıkmış Q11: A-G harflerinin tüm permütasyonları begin or end with A/E. Doğru sayım?",
+            options: ["7!-5!", "2·6!+2·6!", "6!+6!-5!", "2·6!+2·6!-2·5!"],
+            a: 3,
+            exp: "Başta vowel 2·6!, sonda vowel 2·6!, hem baş hem son vowel olanlar 2·5! kez çift sayıldı."
+          },
+          {
+            q: "Çıkmış Q12: 6 karakterli password, 62 karakter seçeneği, en az bir digit. Formül?",
+            options: ["62^6-10^6", "62^6-26^6", "62^6-36^6", "62^6-52^6"],
+            a: 3,
+            exp: "Tüm passwordlar 62^6, digit içermeyenler sadece 52 harften oluşur."
+          },
+          {
+            q: "Çıkmış Q13: (x+y)^10 açılımında kaç terim vardır?",
+            options: ["9", "10", "11", "12"],
+            a: 2,
+            exp: "(x+y)^n açılımında n+1 terim vardır."
+          },
+          {
+            q: "Çıkmış Q20: Strongly connected directed graph ne demektir?",
+            options: ["Her vertex aynı degree'ye sahiptir", "Her vertex'ten her vertex'e path vardır", "Cycle yoktur", "Directed edge yoktur"],
+            a: 1,
+            exp: "Strong connectedness yönleri takip ederek herkesin herkese ulaşabilmesidir."
+          },
+          {
+            q: "Çıkmış Q21: Directed graph'ta tüm in-degree ve out-degree toplamı birlikte nedir?",
+            options: ["|E|", "|V|", "2|E|", "2|V|"],
+            a: 2,
+            exp: "Toplam in-degree |E|, toplam out-degree |E|. Birlikte 2|E|."
+          },
+          {
+            q: "Çıkmış Q22: Connected planar graph, V=6, E=7. Region sayısı?",
+            options: ["11", "9", "7", "3"],
+            a: 3,
+            exp: "Euler: V-E+R=2, yani R=2-6+7=3."
+          },
+          {
+            q: "Çıkmış Q23: Hamiltonian path nedir?",
+            options: ["Her vertex'i tam bir kez ziyaret eden path", "Başladığı yerde biten path", "Her edge'i tam bir kez kullanan path", "En çok edge içeren path"],
+            a: 0,
+            exp: "Hamiltonian vertex odaklıdır; Eulerian edge odaklıdır."
+          },
+          {
+            q: "Çıkmış Q24: Path length neyle ölçülür?",
+            options: ["Region sayısı", "Vertex sayısı", "Degree toplamı", "Edge sayısı"],
+            a: 3,
+            exp: "Path uzunluğu path üzerindeki edge sayısıdır."
+          },
+          {
+            q: "Çıkmış Q35: 15 vertex'in hepsi degree 5 olabilir mi?",
+            options: ["Evet", "Hayır, toplam degree 75 tek çıkar", "Evet, complete graph olur", "Hayır, çünkü 15 asal değildir"],
+            a: 1,
+            exp: "Handshaking lemma'ya göre degree toplamı çift olmalı. 15·5=75 tek."
+          },
+          {
+            q: "Çıkmış Q33: 24 vertex, 30 edge için toplam degree kaçtır?",
+            options: ["30", "48", "60", "120"],
+            a: 2,
+            exp: "Handshaking lemma: toplam degree 2|E| = 60."
           }
         ]
       },
