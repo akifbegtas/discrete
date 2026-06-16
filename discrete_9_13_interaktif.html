@@ -802,6 +802,37 @@
         </div>
 
         <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>0. Konuyu gerçekten anlamak: fonksiyon bir makine gibi düşünülür</h3>
+            <p>Fonksiyon dediğimiz şey aslında "input verdim, sistem bana ne döndü?" sorusunun matematiksel halidir. Burada önemli olan formülün güzel görünmesi değil, sistemin her inputa <strong>net ve tek</strong> cevap verip vermemesidir.</p>
+            <p>Mesela bir firewall packet alıp label döndürüyor. Bir packet için sadece <span class="mono">safe</span> döndürüyorsa sorun yok. Aynı packet için hem <span class="mono">safe</span> hem <span class="mono">malicious</span> diyorsa bu artık fonksiyon değildir, çünkü aynı input iki farklı output aldı. Ama yüzlerce packet aynı <span class="mono">safe</span> label'ını alabilir; bu fonksiyon olmayı bozmaz. Yani yasak olan şey output paylaşımı değil, inputun kararsız kalmasıdır.</p>
+            <div class="steps">
+              <div class="step"><strong>Önce domain'i bul:</strong> Soru hangi inputları sisteme sokuyor? Sensor mü, packet mı, integer mı, task mı?</div>
+              <div class="step"><strong>Sonra output davranışına bak:</strong> Her input cevap alıyor mu? Aynı input iki cevap alıyor mu?</div>
+              <div class="step"><strong>Sonra codomain-image ayrımını yap:</strong> Codomain izin verilen hedeflerdir; image gerçekten kullanılan hedeflerdir.</div>
+              <div class="step"><strong>En son özel özelliklere geç:</strong> Çarpışma yoksa injective, codomain tamamen vuruluyorsa surjective, ikisi birden varsa bijective.</div>
+            </div>
+            <div class="warning">Sınavda acele edip "outputlar farklı mı?" diye başlamayın. Fonksiyon olma şartı outputtan değil inputtan okunur: her input tam bir output alacak.</div>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Fonksiyon sorusu çözme reçetesi</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Soru tipi</th><th>Ne yapacaksın?</th><th>Kısa karar</th></tr></thead>
+                <tbody>
+                  <tr><td>Function mı?</td><td>Her input var mı, tek output mu?</td><td>Bir input iki output alırsa fonksiyon değil.</td></tr>
+                  <tr><td>Total mı partial mı?</td><td>Domain'deki herkes cevap alıyor mu?</td><td>Outputsuz input varsa partial.</td></tr>
+                  <tr><td>Image nedir?</td><td>Gerçekten çıkan outputları listele.</td><td>Codomain'in tamamı değil, kullanılan kısmı.</td></tr>
+                  <tr><td>Injective mi?</td><td>İki farklı input aynı outputa gidiyor mu?</td><td>Çarpışma varsa injective değil.</td></tr>
+                  <tr><td>Surjective mi?</td><td>Codomain'deki her eleman vurulmuş mu?</td><td>Kullanılmayan codomain elemanı varsa surjective değil.</td></tr>
+                  <tr><td>Inverse var mı?</td><td>Fonksiyon bijective mi?</td><td>Bijective değilse inverse function yok.</td></tr>
+                  <tr><td>Composition</td><td>İçten dışa uygula.</td><td>(g∘f)(x) demek önce f, sonra g.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
           <article class="lesson-card">
             <h3>1. Fonksiyon ne demek?</h3>
             <p>Bir fonksiyon, <strong>her input için tam olarak bir output</strong> veren eşlemedir. Buradaki iki kelime sınavın kalbi: <strong>var</strong> ve <strong>tek</strong>.</p>
@@ -987,6 +1018,32 @@
         </div>
 
         <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>0. Konuyu gerçekten anlamak: bağıntı fonksiyondan daha serbesttir</h3>
+            <p>Bağıntı, iki eleman arasında "şu ilişki var mı?" bilgisini tutar. Fonksiyon gibi nazlı değildir. Bir input hiç kimseyle ilişkili olmayabilir, birden fazla kişiyle ilişkili olabilir, hatta kendisiyle ilişkili olabilir. Bu yüzden relation sorularında temel iş, verilen ordered pair listesini dikkatlice okumaktır.</p>
+            <p>Örnek: <span class="mono">(a,b)</span> varsa "a, b ile ilişkili" demektir. Bu, otomatik olarak <span class="mono">(b,a)</span> var demek değildir. Direction yani sıra önemlidir. Undirected graph gibi düşünmek çok kolay hata yaptırır.</p>
+            <div class="steps">
+              <div class="step"><strong>Seti yaz:</strong> A={1,2,3} ise kontrol edeceğin self-pair'ler (1,1),(2,2),(3,3).</div>
+              <div class="step"><strong>Çiftleri işaretle:</strong> Verilen R listesini gözünün önünde küçük tablo gibi düşün.</div>
+              <div class="step"><strong>Özelliğe göre eksik arat:</strong> Reflexive'de self-pair, symmetric'te ters çift, transitive'de kestirme çift aranır.</div>
+              <div class="step"><strong>Tek karşı örnek yeter:</strong> Bir tane eksik self-pair reflexive'i bozar; bir tane eksik ters çift symmetric'i bozar.</div>
+            </div>
+            <div class="memory">Relation sorusu çözmek dedektiflik gibidir: tanımı kanıtlamaya değil, önce tanımı bozacak küçük karşı örneği yakalamaya çalış.</div>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Relation özellikleri için karar ağacı</h3>
+            <div class="steps">
+              <div class="step"><strong>Reflexive:</strong> "Herkes kendisiyle ilişkili mi?" Bütün diagonal çiftler varsa evet.</div>
+              <div class="step"><strong>Irreflexive:</strong> "Kimse kendisiyle ilişkili değil mi?" Tek diagonal çift varsa hayır.</div>
+              <div class="step"><strong>Symmetric:</strong> "Gidiş varsa dönüş var mı?" (a,b) için (b,a) ararsın.</div>
+              <div class="step"><strong>Asymmetric:</strong> "Gidiş varsa dönüş kesin yok mu?" Ayrıca self-pair de olamaz.</div>
+              <div class="step"><strong>Antisymmetric:</strong> "Farklı iki eleman arasında iki yön birden var mı?" Varsa bozulur; self-pair sorun değildir.</div>
+              <div class="step"><strong>Transitive:</strong> "a→b ve b→c varsa a→c var mı?" Zincir bul, kestirme çift ara.</div>
+            </div>
+            <div class="warning">En çok karıştırılan yer: symmetric ile antisymmetric zıt değildir. Bir relation hem symmetric hem antisymmetric olabilir; örneğin sadece self-pair'lerden oluşuyorsa.</div>
+          </article>
+
           <article class="lesson-card">
             <h3>1. Relation nedir?</h3>
             <p>A ve B setleri için relation, A×B'nin herhangi bir alt kümesidir. Yani relation "kim kiminle ilişkili?" listesidir.</p>
@@ -1155,6 +1212,34 @@
         </div>
 
         <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>0. Konuyu gerçekten anlamak: graph çizim değil, bağlantı bilgisidir</h3>
+            <p>Graph teorisinde çizdiğin noktalar ve çizgiler aslında bir sistemin iskeletidir. Vertex dediğin şey router, sensor, şehir, task, processor olabilir. Edge dediğin şey de kablo, yol, dependency, communication link veya veri akışı olabilir. Yani soru "graph" diyorsa aslında "kim kime bağlı?" diye soruyor.</p>
+            <p>Bu haftada iki ana refleks kazanman gerekiyor. Birincisi degree saymak: bir vertexe kaç bağlantı dokunuyor? İkincisi route sınıflandırmak: verilen sıra walk mı, trail mi, path mi, cycle mı?</p>
+            <div class="steps">
+              <div class="step"><strong>Undirected ise:</strong> Edge iki yönlüdür. A-B ile B-A aynı kenardır.</div>
+              <div class="step"><strong>Directed ise:</strong> Ok yönüne uymak zorundasın. A→B varsa B→A otomatik yoktur.</div>
+              <div class="step"><strong>Degree sayarken:</strong> Undirected graph'ta edge vertexe değiyorsa say. Directed graph'ta gelen ve çıkan okları ayrı say.</div>
+              <div class="step"><strong>Route sınıflarken:</strong> Önce adjacency geçerli mi bak; sonra edge tekrarı, vertex tekrarı ve kapalı mı diye kontrol et.</div>
+            </div>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Walk, trail, path, cycle kafaya kazıma bölümü</h3>
+            <p>Bunlar birbirinin üstüne sıkılaşan kavramlardır. En gevşek olan walk'tır: bağlantılar geçerliyse tekrar serbest. Trail biraz disiplin getirir: aynı edge'i tekrar kullanma. Path daha da sıkıdır: aynı vertexe tekrar uğrama. Cycle ise path'in kapalı halidir: başladığın yere dönersin ama aradaki vertexleri tekrar etmezsin.</p>
+            <div class="compare">
+              <div>
+                <strong>Günlük dil çevirisi</strong>
+                <p>Walk: dolaştım. Trail: aynı yolu iki kere kullanmadım. Path: aynı durağa iki kere uğramadım. Cycle: temiz bir tur attım ve başladığım yere döndüm.</p>
+              </div>
+              <div>
+                <strong>Sınav kontrolü</strong>
+                <p>Önce edge'leri listele. Aynı undirected edge iki defa geçti mi? Sonra vertex listesini kontrol et. İlk ve son aynı mı? Ona göre sınıfı seç.</p>
+              </div>
+            </div>
+            <div class="warning">Undirected grafikte B-C ve C-B aynı edge'dir. Bu yüzden A-B-C-B-D rotasında B-C kenarı tekrar kullanılmış sayılır.</div>
+          </article>
+
           <article class="lesson-card">
             <h3>1. Graph dili</h3>
             <p>G=(V,E). V vertex seti, E edge seti. Vertex processor, router, sensor, task olabilir. Edge bağlantı, bağımlılık, yol, sinyal akışı olabilir.</p>
@@ -1280,6 +1365,34 @@
         </div>
 
         <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>0. Konuyu gerçekten anlamak: grafikten parça seçmek ve ağın kopup kopmadığını okumak</h3>
+            <p>Bu hafta iki farklı düşünme modu var. Birincisi "orijinal grafikten nasıl parça seçiyorum?" yani subgraph konusu. İkincisi "ağ ne kadar sağlam, nereden kopar?" yani connectedness konusu.</p>
+            <p>Subgraph'ta elin serbesttir: bazı vertexleri ve bazı edge'leri seçebilirsin. Induced subgraph'ta ise elin o kadar serbest değildir. Vertexleri seçtiğin anda, o vertexler arasında orijinal grafikte hangi edge varsa hepsini almak zorundasın. Bu yüzden induced sorularında yapılan iş, orijinal edge listesini tek tek süzmekten ibarettir.</p>
+            <div class="steps">
+              <div class="step"><strong>Subgraph kontrolü:</strong> H'nin vertexleri G'de mi, H'nin edge'leri G'de mi? İkisi de evetse subgraph.</div>
+              <div class="step"><strong>Induced kontrolü:</strong> H'nin seçtiği vertexler arasında G'de olup H'de olmayan edge var mı? Varsa induced değil.</div>
+              <div class="step"><strong>Weighted graph:</strong> Edge üzerinde sayı varsa o sayı maliyet gibi davranır; route cost toplama işidir.</div>
+              <div class="step"><strong>Connectedness:</strong> Herkes herkese ulaşabiliyor mu? Bir vertex/edge kaldırınca ağ kopuyor mu?</div>
+            </div>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Bağlılık konusunun sınav mantığı</h3>
+            <p>Undirected graph'ta connected olmak, her vertex çiftinin arasında path olmasıdır. Eğer graph birkaç ayrı parçaya bölünmüşse her büyük parça connected component olur. Bridge ve cut vertex ise ağın kırılgan noktalarıdır.</p>
+            <div class="compare">
+              <div>
+                <strong>Undirected ağ</strong>
+                <p>Yön yok. Yol varsa iki tarafa da gidebilirsin. Bridge edge kaldırılınca ağ kopar. Cut vertex kaldırılınca ağ kopar.</p>
+              </div>
+              <div>
+                <strong>Directed ağ</strong>
+                <p>Yön var. Strong connected için herkes herkese ok yönlerini izleyerek ulaşmalı. Weak connected için yönleri silince tek parça kalması yeter.</p>
+              </div>
+            </div>
+            <div class="memory">Strong connected çok daha güçlü şarttır. Strong ise weak de olur; weak ise strong olmak zorunda değildir.</div>
+          </article>
+
           <article class="lesson-card">
             <h3>1. Subgraph ve induced subgraph</h3>
             <p>Subgraph'ta vertex ve edge seçersin. Induced subgraph'ta sadece vertex seçersin; seçtiğin vertexlerin arasındaki orijinal tüm edge'leri almak zorundasın.</p>
@@ -1418,6 +1531,37 @@
         </div>
 
         <div class="lesson-grid">
+          <article class="lesson-card full">
+            <h3>0. Konuyu gerçekten anlamak: uygulama soruları aynı kontrollerin birleşimi</h3>
+            <p>Hafta 13 yeni bir dünya açmıyor; önceki graph kavramlarını daha sınav tarzı sorulara koyuyor. Bu yüzden panik yapma: bridge, cut vertex, vertex connectivity, edge connectivity, SCC ve condensation graph hep aynı "kaldır, ulaşılabilirliği kontrol et, parçaları grupla" mantığıdır.</p>
+            <p>Bir graph'ta cycle varsa o cycle içindeki tek edge genelde bridge değildir, çünkü alternatif yol vardır. İki yoğun parçayı tek bir kenar bağlıyorsa o kenar bridge olur. İki yoğun parçayı tek bir vertex bağlıyorsa o vertex cut vertex olur.</p>
+            <div class="steps">
+              <div class="step"><strong>Bridge için:</strong> Edge'i hayali olarak sil. Component sayısı artıyorsa bridge.</div>
+              <div class="step"><strong>Cut vertex için:</strong> Vertexi ve ona bağlı edge'leri sil. Component sayısı artıyorsa cut vertex.</div>
+              <div class="step"><strong>κ(G) için:</strong> Graph'ı disconnect etmek için gereken en az vertex sayısını bul.</div>
+              <div class="step"><strong>λ(G) için:</strong> Graph'ı disconnect etmek için gereken en az edge sayısını bul.</div>
+              <div class="step"><strong>SCC için:</strong> Directed graph'ta birbirine geri dönebilen vertex gruplarını ayır.</div>
+              <div class="step"><strong>Condensation için:</strong> Her SCC'yi tek node yap, SCC'ler arasındaki okları çiz.</div>
+            </div>
+          </article>
+
+          <article class="lesson-card full">
+            <h3>Uygulama sorularında hızlı sezgi</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Yapı</th><th>Sezgi</th><th>Sonuç</th></tr></thead>
+                <tbody>
+                  <tr><td>Triangle veya cycle içindeki edge</td><td>Alternatif dolaşma yolu vardır.</td><td>Genelde bridge değildir.</td></tr>
+                  <tr><td>İki parçayı bağlayan tek edge</td><td>O edge giderse parçalar ayrılır.</td><td>Bridge.</td></tr>
+                  <tr><td>İki parçayı bağlayan tek vertex</td><td>O vertex giderse geçit kapanır.</td><td>Cut vertex.</td></tr>
+                  <tr><td>Cycle Cn</td><td>Tek vertex/edge kaldırmak path bırakır.</td><td>κ=2, λ=2.</td></tr>
+                  <tr><td>Directed cycle</td><td>Herkes sırayla herkese ulaşabilir.</td><td>Strong connected adaydır.</td></tr>
+                  <tr><td>SCC'ler arası tek yönlü ok</td><td>Gidiş var ama dönüş yok.</td><td>Tek SCC olmaz.</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
           <article class="lesson-card">
             <h3>1. Bridge ve cut vertex stratejisi</h3>
             <p>Soru "all bridges" veya "all cut vertices" diyorsa kenar/vertex kaldırma simülasyonu yap. Bir cycle içindeki edge genellikle bridge değildir, çünkü alternatif yol vardır.</p>
