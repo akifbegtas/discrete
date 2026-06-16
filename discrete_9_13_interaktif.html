@@ -1,0 +1,2308 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Discrete Math 9-13 Interaktif Final Kampi</title>
+  <style>
+    :root {
+      --bg: #f7f5ef;
+      --paper: #fffdf8;
+      --paper-2: #f0f7f4;
+      --ink: #22201c;
+      --muted: #69635a;
+      --line: #ded7ca;
+      --teal: #1f7a73;
+      --teal-2: #dff1ed;
+      --coral: #c95f48;
+      --coral-2: #ffe8df;
+      --amber: #a66a00;
+      --amber-2: #fff0cf;
+      --violet: #6554a6;
+      --violet-2: #ebe7ff;
+      --green: #2f7d4f;
+      --red: #b54842;
+      --shadow: 0 12px 34px rgba(41, 34, 21, 0.09);
+      --radius: 8px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, rgba(223, 241, 237, 0.55), rgba(255, 253, 248, 0) 360px),
+        var(--bg);
+      font-family: var(--sans);
+      line-height: 1.55;
+    }
+
+    button,
+    input,
+    textarea,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 290px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid var(--line);
+      background: rgba(255, 253, 248, 0.88);
+      backdrop-filter: blur(14px);
+      padding: 22px 18px;
+    }
+
+    .brand {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1.25rem;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .brand p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .nav-group {
+      display: grid;
+      gap: 8px;
+      margin: 16px 0 24px;
+    }
+
+    .nav-button,
+    .small-button,
+    .choice,
+    .tool-button {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      color: var(--ink);
+      min-height: 42px;
+      transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s ease;
+    }
+
+    .nav-button {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 12px;
+      text-align: left;
+    }
+
+    .nav-button:hover,
+    .small-button:hover,
+    .tool-button:hover,
+    .choice:hover {
+      transform: translateY(-1px);
+      border-color: rgba(31, 122, 115, 0.55);
+    }
+
+    .nav-button.active {
+      background: var(--teal-2);
+      border-color: rgba(31, 122, 115, 0.6);
+      color: #155c56;
+      font-weight: 750;
+    }
+
+    .nav-button .week {
+      font-family: var(--mono);
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .side-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--paper-2);
+      margin-top: 14px;
+    }
+
+    .side-card h2 {
+      margin: 0 0 8px;
+      font-size: 0.94rem;
+    }
+
+    .side-card p,
+    .side-card li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin: 0;
+    }
+
+    .side-card ul {
+      padding-left: 18px;
+      margin: 6px 0 0;
+    }
+
+    .main {
+      min-width: 0;
+      padding: 28px clamp(18px, 4vw, 54px) 70px;
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 22px;
+    }
+
+    .headline {
+      display: grid;
+      gap: 8px;
+    }
+
+    .eyebrow {
+      color: var(--teal);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    .headline h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 3.3vw, 3.15rem);
+      line-height: 1.04;
+      letter-spacing: 0;
+    }
+
+    .headline p {
+      max-width: 850px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .search-card {
+      display: grid;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .search-card label {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .search-card input,
+    .tool input,
+    .tool textarea {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 10px 12px;
+      color: var(--ink);
+    }
+
+    .progress {
+      display: grid;
+      gap: 8px;
+    }
+
+    .bar {
+      height: 9px;
+      background: #e8e0d2;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--teal), var(--coral));
+      transition: width 0.25s ease;
+    }
+
+    .module {
+      display: none;
+    }
+
+    .module.active {
+      display: block;
+    }
+
+    .module-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: end;
+      gap: 20px;
+      padding: 22px;
+      margin-bottom: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      box-shadow: var(--shadow);
+    }
+
+    .module-header h2 {
+      margin: 0;
+      font-size: clamp(1.45rem, 2.5vw, 2.35rem);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .module-header p {
+      margin: 8px 0 0;
+      color: var(--muted);
+      max-width: 900px;
+    }
+
+    .pill-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+      margin-bottom: 16px;
+    }
+
+    .lesson-card,
+    .example-card,
+    .quiz-card,
+    .tool {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--paper);
+      padding: 18px;
+      box-shadow: 0 8px 24px rgba(41, 34, 21, 0.06);
+      min-width: 0;
+    }
+
+    .lesson-card.full,
+    .example-card.full,
+    .quiz-card.full,
+    .tool.full {
+      grid-column: 1 / -1;
+    }
+
+    .lesson-card h3,
+    .example-card h3,
+    .tool h3,
+    .quiz-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+      letter-spacing: 0;
+      line-height: 1.22;
+    }
+
+    .lesson-card p,
+    .example-card p,
+    .tool p {
+      margin: 8px 0;
+      color: var(--ink);
+    }
+
+    .lesson-card ul,
+    .example-card ul,
+    .lesson-card ol,
+    .example-card ol {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    .lesson-card li,
+    .example-card li {
+      margin: 6px 0;
+    }
+
+    .formula,
+    .memory,
+    .warning,
+    .success {
+      border-radius: var(--radius);
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .formula {
+      background: #fff7e6;
+      border-color: #e2c47b;
+      font-family: var(--mono);
+      font-size: 0.94rem;
+      overflow-x: auto;
+    }
+
+    .memory {
+      background: var(--teal-2);
+      border-color: rgba(31, 122, 115, 0.25);
+    }
+
+    .warning {
+      background: var(--coral-2);
+      border-color: rgba(201, 95, 72, 0.25);
+    }
+
+    .success {
+      background: #e9f6e8;
+      border-color: rgba(47, 125, 79, 0.25);
+    }
+
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 0;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    summary {
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 800;
+      background: #fbf7ee;
+    }
+
+    details > div {
+      padding: 14px;
+    }
+
+    .steps {
+      counter-reset: step;
+      display: grid;
+      gap: 10px;
+    }
+
+    .step {
+      position: relative;
+      padding-left: 42px;
+      min-height: 32px;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.85rem;
+    }
+
+    .compare {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .compare > div {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: #fff;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      max-width: 100%;
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #fbf7ee;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .diagram {
+      width: 100%;
+      max-width: 560px;
+      min-height: 220px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      margin-top: 12px;
+    }
+
+    .diagram text {
+      font-family: var(--sans);
+      font-weight: 800;
+      fill: var(--ink);
+    }
+
+    .diagram .edge {
+      stroke: #7b7266;
+      stroke-width: 3;
+      fill: none;
+    }
+
+    .diagram .arrow {
+      marker-end: url(#arrow);
+    }
+
+    .diagram .node {
+      fill: var(--teal-2);
+      stroke: var(--teal);
+      stroke-width: 2;
+    }
+
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .tool-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 12px 0;
+    }
+
+    .tool-button,
+    .small-button {
+      padding: 9px 12px;
+      font-weight: 800;
+      min-width: 44px;
+    }
+
+    .tool-button.primary,
+    .small-button.primary {
+      background: var(--teal);
+      color: #fff;
+      border-color: var(--teal);
+    }
+
+    .tool-button.warn {
+      background: var(--coral);
+      color: #fff;
+      border-color: var(--coral);
+    }
+
+    .result-box {
+      min-height: 72px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 12px;
+      margin-top: 12px;
+      color: var(--ink);
+    }
+
+    .result-box strong {
+      color: var(--teal);
+    }
+
+    .pair-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pair-grid label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      min-height: 38px;
+      padding: 8px;
+      font-family: var(--mono);
+    }
+
+    .quiz-shell {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .quiz-list {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .quiz-question {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      background: #fff;
+      margin-bottom: 12px;
+    }
+
+    .quiz-question h4 {
+      margin: 0 0 10px;
+      font-size: 1rem;
+      line-height: 1.35;
+    }
+
+    .choice {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 8px;
+      align-items: center;
+      padding: 10px;
+      margin: 8px 0;
+    }
+
+    .choice.correct {
+      border-color: rgba(47, 125, 79, 0.55);
+      background: #eaf7ea;
+    }
+
+    .choice.wrong {
+      border-color: rgba(181, 72, 66, 0.55);
+      background: #ffe8e4;
+    }
+
+    .feedback {
+      display: none;
+      margin-top: 10px;
+      border-radius: var(--radius);
+      padding: 10px;
+      background: #f8f1e6;
+      color: var(--ink);
+    }
+
+    .feedback.visible {
+      display: block;
+    }
+
+    .score-line {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      padding: 12px;
+      border-radius: var(--radius);
+      background: var(--paper-2);
+      border: 1px solid var(--line);
+      margin: 12px 0;
+      font-weight: 800;
+    }
+
+    .note-pad textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    .hidden-by-search {
+      display: none !important;
+    }
+
+    code,
+    .mono {
+      font-family: var(--mono);
+      background: #f2ece0;
+      border-radius: 6px;
+      padding: 2px 5px;
+      font-size: 0.94em;
+    }
+
+    @media (max-width: 1100px) {
+      .app {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: relative;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-group {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .topbar,
+      .module-header,
+      .quiz-shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .main {
+        padding: 18px 12px 60px;
+      }
+
+      .lesson-grid,
+      .tools-grid,
+      .compare {
+        grid-template-columns: 1fr;
+      }
+
+      .module-header {
+        padding: 16px;
+      }
+
+      .nav-group {
+        grid-template-columns: 1fr;
+      }
+
+      .pair-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="eyebrow">MTH2130</div>
+        <h1>Discrete 9-13 Final Kampi</h1>
+        <p>Fonksiyon, bağıntı, grafik, ağaç/bağlılık ve uygulamalar. PDF örnekleri üstünden tane tane.</p>
+      </div>
+
+      <nav class="nav-group" aria-label="Ana bölümler">
+        <button class="nav-button active" type="button" data-target="w9"><span>Fonksiyonlar</span><span class="week">9</span></button>
+        <button class="nav-button" type="button" data-target="w10"><span>Bağıntılar</span><span class="week">10</span></button>
+        <button class="nav-button" type="button" data-target="w11"><span>Grafik Temeli</span><span class="week">11</span></button>
+        <button class="nav-button" type="button" data-target="w12"><span>Subgraph ve Bağlılık</span><span class="week">12</span></button>
+        <button class="nav-button" type="button" data-target="w13"><span>Uygulamalar</span><span class="week">13</span></button>
+        <button class="nav-button" type="button" data-target="labs"><span>Mini Araçlar</span><span class="week">Lab</span></button>
+        <button class="nav-button" type="button" data-target="tests"><span>Testler</span><span class="week">Quiz</span></button>
+      </nav>
+
+      <div class="side-card">
+        <h2>Finalde hızlı kontrol</h2>
+        <ul>
+          <li>Fonksiyonda önce her input tam bir output alıyor mu?</li>
+          <li>Bağıntıda özellikleri çiftlerden tek tek kontrol et.</li>
+          <li>Grafikte degree topluyorsan toplam çift sayı çıkmalı.</li>
+          <li>Directed grafikte yönleri yok saymak ve izlemek farklı şey.</li>
+        </ul>
+      </div>
+
+      <div class="side-card note-pad">
+        <h2>Kendi notun</h2>
+        <textarea id="notePad" placeholder="Buraya kendi final notlarını yaz. Otomatik saklanır."></textarea>
+      </div>
+    </aside>
+
+    <main class="main">
+      <section class="topbar">
+        <div class="headline">
+          <div class="eyebrow">Tek HTML çalışma dosyası</div>
+          <h2>9-13 arası konular, örnek çözüm ve otomatik test.</h2>
+          <p>Bu dosya slaytlardaki örnekleri sınav mantığıyla yeniden anlatır: önce kavram, sonra kontrol listesi, sonra PDF tarzı çözümlü soru, en sonda test.</p>
+        </div>
+        <div class="search-card">
+          <label for="searchBox">Arama</label>
+          <input id="searchBox" type="search" placeholder="örnek: injective, bridge, transitive">
+          <div class="progress">
+            <div class="score-line"><span>Test ilerleme</span><span id="progressText">0/0</span></div>
+            <div class="bar" aria-hidden="true"><span id="progressBar"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="w9" class="module active" data-title="fonksiyonlar functions total partial image injective surjective bijective inverse composition">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Hafta 9</div>
+            <h2>Fonksiyonlar: input-output düzeni</h2>
+            <p>Fonksiyonu lise formülü gibi değil, mühendislikte deterministik sistem modeli gibi düşün: her izin verilen girdi net, tek bir çıktı üretmeli.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">domain</span>
+            <span class="pill">codomain</span>
+            <span class="pill">image</span>
+            <span class="pill">inverse</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card">
+            <h3>1. Fonksiyon ne demek?</h3>
+            <p>Bir fonksiyon, <strong>her input için tam olarak bir output</strong> veren eşlemedir. Buradaki iki kelime sınavın kalbi: <strong>var</strong> ve <strong>tek</strong>.</p>
+            <ul>
+              <li><strong>Var:</strong> Domain içindeki her elemanın bir çıktısı olacak.</li>
+              <li><strong>Tek:</strong> Aynı input iki farklı output alamaz.</li>
+              <li><strong>Birden çok input aynı output alabilir:</strong> Bu fonksiyon olmayı bozmaz.</li>
+            </ul>
+            <div class="formula">f: A → B fonksiyondur ⇔ ∀a ∈ A, ∃!b ∈ B öyle ki f(a)=b.</div>
+            <div class="memory">Kafada tut: Input kıskançtır, iki output istemez. Output paylaşılabilir.</div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>2. Domain, codomain, image</h3>
+            <p>Domain, makinenin kabul ettiği input setidir. Codomain, tasarımda hedeflenen output setidir. Image ise gerçekten kullanılan outputlardır.</p>
+            <ul>
+              <li><strong>Domain:</strong> Neyi içeri sokuyorum?</li>
+              <li><strong>Codomain:</strong> Çıkışların teorik olarak nerede yaşamasına izin veriyorum?</li>
+              <li><strong>Image:</strong> Gerçekte hangi çıkışlar kullanıldı?</li>
+            </ul>
+            <div class="formula">Im(f) = { f(a) | a ∈ A } ve her zaman Im(f) ⊆ B.</div>
+            <div class="warning">Codomain ile image aynı olmak zorunda değil. "Malicious hiç üretilmedi" demek codomain'den silindi demek değildir.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örneği: Sensor classifier image-codomain farkı</h3>
+            <details open>
+              <summary>f: SensorPatterns → {Normal, Warning, Critical, Failure}</summary>
+              <div class="steps">
+                <div class="step"><strong>Codomain'i oku:</strong> Sistem dört label üretebilir diye tasarlanmış: Normal, Warning, Critical, Failure.</div>
+                <div class="step"><strong>Gerçek outputlara bak:</strong> Deployment sonrası sadece Normal, Warning, Critical geliyor.</div>
+                <div class="step"><strong>Image'i yaz:</strong> Im(f) = {Normal, Warning, Critical}.</div>
+                <div class="step"><strong>Sonuç:</strong> Codomain 4 elemanlı, image 3 elemanlı. Failure mümkün hedef ama şu anda ulaşılmıyor.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>3. Total ve partial fonksiyon</h3>
+            <p>Total fonksiyon domain'deki herkese cevap verir. Partial fonksiyon bazı inputlarda susar. Susmak, yanlış output vermekten farklıdır.</p>
+            <div class="compare">
+              <div>
+                <strong>Total</strong>
+                <p>Her input handled. Örnek: yanlış şifreye bile AccessDenied dönmek.</p>
+              </div>
+              <div>
+                <strong>Partial</strong>
+                <p>Bazı inputlarda sonuç yok. Örnek: yanlış şifrede sistemin hiç cevap vermemesi.</p>
+              </div>
+            </div>
+            <div class="formula">Total: ∀a ∈ A, f(a) tanımlı. Partial: bazı a ∈ A için f(a) tanımsız olabilir.</div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>4. Partial'i total yapma</h3>
+            <p>Slaytların ana taktiği şu: Undefined kalan inputlara fallback, error veya safe output ekle.</p>
+            <ul>
+              <li>Login: wrong password -> AccessDenied ekle.</li>
+              <li>Robot: invalid data -> EmergencyStop ekle.</li>
+              <li>Matematik: f(x)=1/x için domain'i R \ {0} yaparsan total olur.</li>
+            </ul>
+            <div class="memory">Bir input boşta kalıyorsa ya domain'i daralt ya codomain'e anlamlı bir fallback ekle.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örneği: Login sistemi total mi partial mı?</h3>
+            <details>
+              <summary>Yanlış credential gelince sistem cevap vermiyor</summary>
+              <div class="steps">
+                <div class="step"><strong>Input seti:</strong> (username, password) çiftleri.</div>
+                <div class="step"><strong>Davranış:</strong> doğruysa AccessGranted, yanlışsa output yok.</div>
+                <div class="step"><strong>Karar:</strong> Bazı inputlar outputsuz kaldığı için partial.</div>
+                <div class="step"><strong>Total yap:</strong> Codomain'i {AccessGranted, AccessDenied} yap ve yanlış inputa AccessDenied ver.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Robot sensör örneği</summary>
+              <div class="steps">
+                <div class="step">Başta valid data -> Move/Stop, invalid data -> Stop ise her input cevap alır: total.</div>
+                <div class="step">Invalid data handling kaldırılırsa invalid inputlar outputsuz kalır: partial.</div>
+                <div class="step">Invalid data -> EmergencyStop eklenirse yeniden total olur.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>5. Fonksiyon eşitliği</h3>
+            <p>İki fonksiyonun formülü aynı gibi görünse bile yetmez. Üç şey aynı olacak: domain, codomain, her inputtaki output.</p>
+            <ol>
+              <li>Domain aynı mı?</li>
+              <li>Codomain aynı mı?</li>
+              <li>Her x için f(x)=g(x) mi?</li>
+            </ol>
+            <div class="warning">En klasik tuzak: formüller aynı, domain farklı. O zaman fonksiyonlar eşit değildir.</div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>6. Injective, surjective, bijective</h3>
+            <ul>
+              <li><strong>Injective:</strong> farklı inputlar aynı outputa çarpışmaz.</li>
+              <li><strong>Surjective:</strong> codomain'deki her output vurulur.</li>
+              <li><strong>Bijective:</strong> hem injective hem surjective. Ters fonksiyon buradan gelir.</li>
+            </ul>
+            <div class="formula">Injective: f(x1)=f(x2) ⇒ x1=x2<br>Surjective: ∀y ∈ B, ∃x ∈ A: f(x)=y</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örnekleri: eşitlik, injective, surjective, inverse</h3>
+            <details>
+              <summary>f(x)=3x+2 ve g(x)=x+2x+2, D={0,1,2,3,4}</summary>
+              <div class="steps">
+                <div class="step">Domain aynı: D.</div>
+                <div class="step">Codomain aynı: Z.</div>
+                <div class="step">g(x)=x+2x+2 = 3x+2, yani her inputta aynı output.</div>
+                <div class="step">Sonuç: f=g.</div>
+              </div>
+            </details>
+            <details>
+              <summary>h:P→Z≥0, k:{0,1,2,3,4,5}→Z≥0, aynı formül</summary>
+              <div class="steps">
+                <div class="step">h'nin domain'i {1,2,3,4,5}; k'nin domain'i {0,1,2,3,4,5}.</div>
+                <div class="step">0, k'de var ama h'de yok.</div>
+                <div class="step">Formül ortak inputlarda aynı olsa bile domain farklı.</div>
+                <div class="step">Sonuç: h ≠ k.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Sensor ID f(x)=x+100 injective mi?</summary>
+              <div class="steps">
+                <div class="step">Eşit output varsay: f(x1)=f(x2).</div>
+                <div class="step">x1+100=x2+100.</div>
+                <div class="step">100'leri çıkar: x1=x2.</div>
+                <div class="step">Sonuç: injective.</div>
+              </div>
+            </details>
+            <details>
+              <summary>f: Z→Z, f(x)=2x+3 ters fonksiyon tuzağı</summary>
+              <div class="steps">
+                <div class="step">Injective: 2x1+3=2x2+3 ise x1=x2.</div>
+                <div class="step">Surjective onto Z değil: her integer y için (y-3)/2 integer olmayabilir.</div>
+                <div class="step">Codomain'i odd integers yaparsan her y odd için x=(y-3)/2 integer olur.</div>
+                <div class="step">Uygun codomain ile inverse: f<sup>-1</sup>(y)=(y-3)/2.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>7. Composition</h3>
+            <p>Composition, bir sistemin çıktısını diğer sistemin girdisine bağlamaktır. Sıra çok önemlidir.</p>
+            <div class="formula">f: A→B, g: B→C ise (g∘f)(x)=g(f(x)).</div>
+            <ul>
+              <li>Önce f çalışır, sonra g.</li>
+              <li>Genelde g∘f ≠ f∘g.</li>
+              <li>Inverse composition'da sıra ters döner: (g∘f)<sup>-1</sup> = f<sup>-1</sup>∘g<sup>-1</sup>.</li>
+            </ul>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF örneği: sinyal işleme</h3>
+            <p>f(x)=3x+2, g(x)=x<sup>2</sup>.</p>
+            <div class="steps">
+              <div class="step">(g∘f)(x)=g(3x+2)=(3x+2)<sup>2</sup>=9x<sup>2</sup>+12x+4.</div>
+              <div class="step">(f∘g)(x)=f(x<sup>2</sup>)=3x<sup>2</sup>+2.</div>
+              <div class="step">Sonuçlar farklı. Önce amplify sonra square yapmak ile önce square sonra amplify yapmak aynı fiziksel sistem değildir.</div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section id="w10" class="module" data-title="relations bağıntılar reflexive irreflexive symmetric asymmetric antisymmetric transitive equivalence partial order total order matrix digraph">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Hafta 10</div>
+            <h2>Bağıntılar: çiftlerden özellik okuma</h2>
+            <p>Relation, ordered pair setidir. Sınavda çoğu soru "bu özellik var mı?" diye sorar. Cevap için tanımı ezberlemekten çok eksik veya ters çift yakalamak gerekir.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">R ⊆ A×B</span>
+            <span class="pill">matrix</span>
+            <span class="pill">digraph</span>
+            <span class="pill">order</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card">
+            <h3>1. Relation nedir?</h3>
+            <p>A ve B setleri için relation, A×B'nin herhangi bir alt kümesidir. Yani relation "kim kiminle ilişkili?" listesidir.</p>
+            <div class="formula">R ⊆ A×B. Eğer (a,b) ∈ R ise aRb yazılır.</div>
+            <ul>
+              <li>Roster: tüm çiftleri yazarsın.</li>
+              <li>Set-builder: kural yazarsın, örn. {(x,y) ∈ Z² | x≤y}.</li>
+              <li>Matrix: çift varsa 1, yoksa 0.</li>
+              <li>Directed graph: (a,b) için a'dan b'ye ok çizilir.</li>
+            </ul>
+          </article>
+
+          <article class="lesson-card">
+            <h3>2. Özellikleri bir bakışta ayır</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Özellik</th><th>Bakacağın şey</th><th>Bozan şey</th></tr></thead>
+                <tbody>
+                  <tr><td>Reflexive</td><td>Her (a,a) var mı?</td><td>Bir self-pair eksik</td></tr>
+                  <tr><td>Irreflexive</td><td>Hiç (a,a) yok mu?</td><td>Tek self-pair bile varsa</td></tr>
+                  <tr><td>Symmetric</td><td>(a,b) varsa (b,a) var mı?</td><td>Ters çift eksik</td></tr>
+                  <tr><td>Asymmetric</td><td>(a,b) varsa (b,a) yok mu?</td><td>Ters çift veya self-pair</td></tr>
+                  <tr><td>Antisymmetric</td><td>Karşılıklı ilişki sadece a=b iken mi?</td><td>a≠b için iki yön birden</td></tr>
+                  <tr><td>Transitive</td><td>(a,b),(b,c) varsa (a,c) var mı?</td><td>Zincirin kestirmesi eksik</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örnekleri: temel relation özellikleri</h3>
+            <details>
+              <summary>Reflexive - module compatibility</summary>
+              <div class="steps">
+                <div class="step">Set M={m1,m2,m3,m4} ise reflexive için (m1,m1),(m2,m2),(m3,m3),(m4,m4) şart.</div>
+                <div class="step">Verilen R bu dört self-pair'i içeriyor.</div>
+                <div class="step">Sonuç: reflexive.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Reflexive değil - v5 eksik</summary>
+              <div class="steps">
+                <div class="step">V={v1,v2,v3,v4,v5} için beş self-pair gerekir.</div>
+                <div class="step">R içinde (v5,v5) yok.</div>
+                <div class="step">Tek eksik bile reflexive olmayı bozar.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Irreflexive - strict before task relation</summary>
+              <div class="steps">
+                <div class="step">Strict precedence, self-pair istemez: task kendisinden önce bitmez.</div>
+                <div class="step">R={(T1,T2),(T2,T3)} içinde (T1,T1),(T2,T2),(T3,T3) yok.</div>
+                <div class="step">Sonuç: irreflexive.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Symmetric değil - fault signature</summary>
+              <div class="steps">
+                <div class="step">R içinde (d2,d3) varsa symmetric için (d3,d2) de gerekir.</div>
+                <div class="step">(d3,d2) yok.</div>
+                <div class="step">Sonuç: symmetric değil.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>3. Symmetric, asymmetric, antisymmetric farkı</h3>
+            <p>Bu üçlü çok karışır. Kısa ayrım:</p>
+            <ul>
+              <li><strong>Symmetric:</strong> Gidiş varsa dönüş de olacak.</li>
+              <li><strong>Asymmetric:</strong> Gidiş varsa dönüş asla olmayacak. Self-pair de olamaz.</li>
+              <li><strong>Antisymmetric:</strong> Farklı iki eleman arasında iki yön birden olamaz. Self-pair serbest.</li>
+            </ul>
+            <div class="memory">Antisymmetric "symmetric değil" demek değildir. İsmi yanıltıyor.</div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>4. Transitive nasıl kontrol edilir?</h3>
+            <p>Bir zincir yakala: aRb ve bRc. Eğer aRc yoksa transitive patlar. Zincir yoksa çoğu durumda transitivity vacuously true olabilir.</p>
+            <div class="formula">(a,b) ∈ R ve (b,c) ∈ R ⇒ (a,c) ∈ R.</div>
+            <div class="warning">"Directly precedes" genellikle transitive değildir. T1 direkt T2'den önce, T2 direkt T3'ten önce ise T1 direkt T3'ten önce olmak zorunda değildir.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örnekleri: antisymmetric ve transitive</h3>
+            <details>
+              <summary>Divisibility on {1,2,4,8} antisymmetric mi?</summary>
+              <div class="steps">
+                <div class="step">aRb demek a divides b.</div>
+                <div class="step">Eğer a|b ve b|a ise pozitif integerlarda ancak a=b olur.</div>
+                <div class="step">(2,4) var ama (4,2) yok; (4,8) var ama (8,4) yok.</div>
+                <div class="step">İki yönlü görünenler sadece (1,1),(2,2),(4,4),(8,8).</div>
+                <div class="step">Sonuç: antisymmetric.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Undirected communication antisymmetric mi?</summary>
+              <div class="steps">
+                <div class="step">Undirected bağlantıda (v1,v2) ve (v2,v1) birlikte gelir.</div>
+                <div class="step">v1≠v2 olduğu halde iki yön de varsa antisymmetry bozulur.</div>
+                <div class="step">Sonuç: antisymmetric değil.</div>
+              </div>
+            </details>
+            <details>
+              <summary>≤ relation transitive mi?</summary>
+              <div class="steps">
+                <div class="step">a≤b ve b≤c ise otomatik olarak a≤c.</div>
+                <div class="step">Örnek: (1,2),(2,3) varsa (1,3) de vardır.</div>
+                <div class="step">Sonuç: transitive.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>5. Equivalence, partial order, total order</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Tür</th><th>Gereken özellikler</th><th>Ne modeller?</th></tr></thead>
+                <tbody>
+                  <tr><td>Equivalence relation</td><td>Reflexive + symmetric + transitive</td><td>Aynı sınıfta olma, aynı fault class, aynı remainder</td></tr>
+                  <tr><td>Partial order</td><td>Reflexive + antisymmetric + transitive</td><td>Hiyerarşi, subset, dependency, ≤</td></tr>
+                  <tr><td>Total order</td><td>Partial order + her iki eleman comparable</td><td>Sıralama, ranking, priority queue</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF örnekleri: order soruları</h3>
+            <details>
+              <summary>A={2,5,8,10}, aRb ⇔ a≤b total order mı?</summary>
+              <div class="steps">
+                <div class="step">Reflexive: her sayı kendisine ≤.</div>
+                <div class="step">Antisymmetric: a≤b ve b≤a ise a=b.</div>
+                <div class="step">Transitive: a≤b≤c ise a≤c.</div>
+                <div class="step">Comparable: iki sayıdan biri küçük eşittir.</div>
+                <div class="step">Sonuç: total order.</div>
+              </div>
+            </details>
+            <details>
+              <summary>{{1},{2}} üzerinde subset total order mı?</summary>
+              <div class="steps">
+                <div class="step">Subset relation reflexive, antisymmetric, transitive olduğu için partial order.</div>
+                <div class="step">Ama {1}⊆{2} değil ve {2}⊆{1} değil.</div>
+                <div class="step">Comparable şartı bozulur.</div>
+                <div class="step">Sonuç: total order değil.</div>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section id="w11" class="module" data-title="graph theory vertices edges degree adjacency handshaking walk trail path cycle directed graph">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Hafta 11</div>
+            <h2>Grafik teorisi: düğüm, kenar, rota</h2>
+            <p>Graph, nesneleri vertex, ilişkileri edge yapar. Bu bölümde degree hesaplama ve walk/trail/path/cycle ayrımı finalde en hızlı puan getiren yerlerdir.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">G=(V,E)</span>
+            <span class="pill">degree</span>
+            <span class="pill">path</span>
+            <span class="pill">cycle</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card">
+            <h3>1. Graph dili</h3>
+            <p>G=(V,E). V vertex seti, E edge seti. Vertex processor, router, sensor, task olabilir. Edge bağlantı, bağımlılık, yol, sinyal akışı olabilir.</p>
+            <ul>
+              <li>Undirected edge: {u,v}. İki yön aynı.</li>
+              <li>Directed edge: (u,v) veya u→v. Yön önemlidir.</li>
+              <li>Adjacent vertices: aralarında edge olan vertexler.</li>
+            </ul>
+          </article>
+
+          <article class="lesson-card">
+            <h3>2. Degree ve handshaking</h3>
+            <p>Undirected grafikte deg(v), v'ye değen kenar sayısıdır. Directed grafikte iki sayı vardır: in-degree ve out-degree.</p>
+            <div class="formula">Undirected: Σ deg(v) = 2|E|<br>Directed: Σ in-deg(v) = Σ out-deg(v) = |E|</div>
+            <div class="memory">Undirected kenar iki vertexe dokunur, bu yüzden degree toplamı kenar sayısının iki katıdır.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örneği: smart factory sensor network</h3>
+            <details open>
+              <summary>Edges: S1S2, S1S3, S1S4, S2S3, S2S5, S3S4, S3S6, S4S6, S5S6</summary>
+              <div class="steps">
+                <div class="step">S1 bağlantıları: S2,S3,S4 -> deg(S1)=3.</div>
+                <div class="step">S2 bağlantıları: S1,S3,S5 -> deg(S2)=3.</div>
+                <div class="step">S3 bağlantıları: S1,S2,S4,S6 -> deg(S3)=4.</div>
+                <div class="step">S4 bağlantıları: S1,S3,S6 -> deg(S4)=3.</div>
+                <div class="step">S5 bağlantıları: S2,S6 -> deg(S5)=2.</div>
+                <div class="step">S6 bağlantıları: S3,S4,S5 -> deg(S6)=3.</div>
+                <div class="step">Toplam degree = 3+3+4+3+2+3=18. Kenar sayısı 9, 2|E|=18. Verified.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF örneği: directed module graph</h3>
+            <p>Edges: I→F, I→C, F→C, F→P, C→P, C→F, P→O.</p>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Vertex</th><th>In-degree</th><th>Out-degree</th></tr></thead>
+                <tbody>
+                  <tr><td>I</td><td>0</td><td>2</td></tr>
+                  <tr><td>F</td><td>2</td><td>2</td></tr>
+                  <tr><td>C</td><td>2</td><td>2</td></tr>
+                  <tr><td>P</td><td>2</td><td>1</td></tr>
+                  <tr><td>O</td><td>1</td><td>0</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>I source-like, O sink-like. Toplam in-degree = toplam out-degree = 7.</p>
+          </article>
+
+          <article class="lesson-card">
+            <h3>3. Walk, trail, path, cycle</h3>
+            <div class="table-wrap">
+              <table>
+                <thead><tr><th>Kavram</th><th>Vertex tekrar?</th><th>Edge tekrar?</th><th>Kapalı?</th></tr></thead>
+                <tbody>
+                  <tr><td>Walk</td><td>Serbest</td><td>Serbest</td><td>Olabilir</td></tr>
+                  <tr><td>Trail</td><td>Olabilir</td><td>Olamaz</td><td>Olabilir</td></tr>
+                  <tr><td>Path</td><td>Olamaz</td><td>Olamaz</td><td>Genelde açık</td></tr>
+                  <tr><td>Cycle</td><td>Sadece ilk=son</td><td>Olamaz</td><td>Evet</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="memory">Path en temiz rotadır. Trail kabloyu tekrar kullanmaz. Walk "gezdim geldim" modudur.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örnekleri: route sınıflandırma</h3>
+            <details>
+              <summary>Robot route: A→B→C→B→D</summary>
+              <div class="steps">
+                <div class="step">Ardışık vertexler bağlıysa bu bir walk.</div>
+                <div class="step">B-C edge'i B→C ve C→B olarak tekrar kullanılır.</div>
+                <div class="step">Edge tekrar ettiği için trail değil.</div>
+                <div class="step">B vertex'i tekrar ettiği için path değil.</div>
+                <div class="step">Başlangıç ve bitiş aynı değil, cycle değil.</div>
+              </div>
+            </details>
+            <details>
+              <summary>A→C→D→B</summary>
+              <div class="steps">
+                <div class="step">Tüm edge'ler geçerli.</div>
+                <div class="step">Edge tekrarı yok: trail.</div>
+                <div class="step">Vertex tekrarı yok: path.</div>
+                <div class="step">Kapalı değil: cycle değil.</div>
+              </div>
+            </details>
+            <details>
+              <summary>B→C→D→B</summary>
+              <div class="steps">
+                <div class="step">B ile başlar, B ile biter.</div>
+                <div class="step">İç vertex tekrarı yok, edge tekrarı yok.</div>
+                <div class="step">Sonuç: cycle. Aynı zamanda trail ve walk'tır.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Directed signal flow: Filter→Encoder→Filter</summary>
+              <div class="steps">
+                <div class="step">Filter→Encoder ve Encoder→Filter yönleri varsa route valid directed walk olur.</div>
+                <div class="step">Başlangıç ve bitiş Filter.</div>
+                <div class="step">Directed edge tekrarı yok, iç vertex tekrarı yok.</div>
+                <div class="step">Sonuç: directed cycle. Sistemde feedback göstergesidir.</div>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section id="w12" class="module" data-title="subgraph induced weighted graph connectivity connected components cut vertex bridge strong weak connected SCC source sink">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Hafta 12</div>
+            <h2>Subgraph, weighted graph ve bağlılık</h2>
+            <p>Bu hafta "orijinal grafikten parça seçme" ve "ağ ne kadar kopmaz?" sorularına geçiyor. Induced subgraph ve connectivity soruları doğrudan set kontrolüdür.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">subgraph</span>
+            <span class="pill">induced</span>
+            <span class="pill">weighted</span>
+            <span class="pill">SCC</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card">
+            <h3>1. Subgraph ve induced subgraph</h3>
+            <p>Subgraph'ta vertex ve edge seçersin. Induced subgraph'ta sadece vertex seçersin; seçtiğin vertexlerin arasındaki orijinal tüm edge'leri almak zorundasın.</p>
+            <div class="compare">
+              <div>
+                <strong>Subgraph</strong>
+                <p>"Bu node'ları ve hoşuma giden edge'leri aldım."</p>
+              </div>
+              <div>
+                <strong>Induced subgraph</strong>
+                <p>"Bu node'ları aldım, aralarındaki tüm gerçek edge'leri de almak zorundayım."</p>
+              </div>
+            </div>
+            <div class="formula">H subgraph ⇔ V(H)⊆V(G) ve E(H)⊆E(G).<br>G[S] induced ⇔ S içindeki uçlara sahip tüm G edge'leri alınır.</div>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF örneği: H subgraph mı induced mı?</h3>
+            <p>G: V={a,b,c,d,e,f}, E={ab,ac,bc,bd,ce,de,ef}. H: V(H)={a,b,c,d}, E(H)={ab,ac,bd}.</p>
+            <div class="steps">
+              <div class="step">V(H), V(G)'nin alt kümesi.</div>
+              <div class="step">H'nin tüm edge'leri G'de var: ab, ac, bd.</div>
+              <div class="step">Bu yüzden H subgraph.</div>
+              <div class="step">Ama {a,b,c,d} arasında G'de bc edge'i de var.</div>
+              <div class="step">H, bc'yi almadığı için induced değil.</div>
+            </div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örneği: induced subgraph G[S]</h3>
+            <details>
+              <summary>S={b,c,d,e}</summary>
+              <div class="steps">
+                <div class="step">Orijinal edge listesine tek tek bak.</div>
+                <div class="step">ab ve ac dışarıda kalır çünkü a, S'de yok.</div>
+                <div class="step">bc, bd, ce, de alınır çünkü iki uç da S'de.</div>
+                <div class="step">ef dışarıda kalır çünkü f, S'de yok.</div>
+                <div class="step">Sonuç: G[S]=({b,c,d,e},{bc,bd,ce,de}).</div>
+              </div>
+            </details>
+            <details>
+              <summary>İkinci PDF örneği: S={2,3,4,5,7}</summary>
+              <div class="steps">
+                <div class="step">G edge'leri: 12,13,23,24,34,35,45,56,67,57.</div>
+                <div class="step">S içinde kalan uçlar: 23,24,34,35,45,57.</div>
+                <div class="step">G[S]=({2,3,4,5,7},{23,24,34,35,45,57}).</div>
+                <div class="step">Aynı vertex setiyle 34 veya 45 gibi edge'leri düşürürsen subgraph olur ama induced olmaz.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>2. Weighted graph</h3>
+            <p>Her edge'in sayısal maliyeti varsa weighted graph olur. Bu maliyet distance, time, battery, resistance, bandwidth cost olabilir.</p>
+            <ul>
+              <li>Undirected weighted: A-B maliyeti iki yönde aynı kabul edilir.</li>
+              <li>Directed weighted: A→B varsa B→A olmak zorunda değil; maliyeti de ayrı olabilir.</li>
+            </ul>
+            <div class="formula">G=(V,E,w), w(e)=edge weight.</div>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF örneği: drone battery route</h3>
+            <p>Directed weights: P→Q=6, P→R=2, P→S=5, Q→T=4, R→T=7, R→S=4, S→U=2, U→T=2.</p>
+            <div class="steps">
+              <div class="step">P→R→S→U→T valid çünkü tüm directed edge'ler var.</div>
+              <div class="step">Cost = 2+4+2+2 = 10.</div>
+              <div class="step">T→U→S→P invalid çünkü T→U yok; sadece U→T var.</div>
+              <div class="step">Rotalar: P→Q→T = 10, P→R→T = 9, P→S→U→T = 9, P→R→S→U→T = 10.</div>
+              <div class="step">En iyi battery cost: 9. İki rota eşit en iyi: P→R→T ve P→S→U→T.</div>
+            </div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>3. Undirected connectedness</h3>
+            <p>Undirected graph connected ise her vertex çifti arasında bir path vardır. Disconnected ise parçalara ayrılır; her büyük bağlı parça connected component'tir.</p>
+            <ul>
+              <li><strong>Cut vertex:</strong> kaldırınca component sayısı artan vertex.</li>
+              <li><strong>Bridge:</strong> kaldırınca component sayısı artan edge.</li>
+              <li><strong>κ(G):</strong> disconnect etmek için gereken minimum vertex sayısı.</li>
+              <li><strong>λ(G):</strong> disconnect etmek için gereken minimum edge sayısı.</li>
+            </ul>
+          </article>
+
+          <article class="lesson-card">
+            <h3>4. Directed connectedness</h3>
+            <p>Directed grafikte yön takip etmek zorundasın. Bu yüzden connected demek tek başına yetmez.</p>
+            <ul>
+              <li><strong>Strongly connected:</strong> her vertex her vertexe directed path ile ulaşır.</li>
+              <li><strong>Weakly connected:</strong> yönleri yok sayınca connected olur.</li>
+              <li><strong>SCC:</strong> kendi içinde herkesin herkese ulaşabildiği en büyük directed parça.</li>
+              <li><strong>Source:</strong> in-degree 0. <strong>Sink:</strong> out-degree 0.</li>
+            </ul>
+            <div class="memory">Strong ise otomatik weak. Weak ise strong olmak zorunda değil.</div>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF örnekleri: connectedness ve robustness</h3>
+            <details>
+              <summary>Road graph: edges A-B, B-C, B-D, B-E</summary>
+              <div class="steps">
+                <div class="step">B merkezli yıldız gibi. Her town B üzerinden diğerlerine ulaşır, connected.</div>
+                <div class="step">Connected olduğu için component sayısı 1.</div>
+                <div class="step">B kaldırılırsa A,C,D,E birbirinden kopar. B cut vertex.</div>
+                <div class="step">A-B edge'i kaldırılırsa A izole olur. A-B bridge.</div>
+                <div class="step">Engineering anlamı: ağ çalışıyor ama B ve A-B kritik zayıf nokta.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Directed router graph: P→Q→R→T→S→P ve Q→T</summary>
+              <div class="steps">
+                <div class="step">Ana cycle P→Q→R→T→S→P tüm vertexleri içerir.</div>
+                <div class="step">Cycle üzerinde dönerek herkes herkese ulaşır.</div>
+                <div class="step">Strongly connected.</div>
+                <div class="step">Strongly connected olduğu için weakly connected da olur.</div>
+                <div class="step">R'den P'ye path: R→T→S→P. P'den S'ye kısa path: P→Q→T→S.</div>
+              </div>
+            </details>
+          </article>
+        </div>
+      </section>
+
+      <section id="w13" class="module" data-title="applications graph theory connectivity bridge cut vertex cycle C6 SCC condensation K4 vertex connectivity edge connectivity">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Hafta 13</div>
+            <h2>Grafik uygulamaları: sınav tipi çözüm</h2>
+            <p>Bu PDF, önceki bağlılık kavramlarını uygulama sorularıyla pekiştiriyor: bridge, cut vertex, κ(G), λ(G), SCC ve condensation graph.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">bridge</span>
+            <span class="pill">cut vertex</span>
+            <span class="pill">κ(G)</span>
+            <span class="pill">λ(G)</span>
+          </div>
+        </div>
+
+        <div class="lesson-grid">
+          <article class="lesson-card">
+            <h3>1. Bridge ve cut vertex stratejisi</h3>
+            <p>Soru "all bridges" veya "all cut vertices" diyorsa kenar/vertex kaldırma simülasyonu yap. Bir cycle içindeki edge genellikle bridge değildir, çünkü alternatif yol vardır.</p>
+            <ul>
+              <li>Cycle içinde edge kaldırınca hâlâ dolaşarak ulaşılabilir.</li>
+              <li>İki büyük parçayı tek edge bağlıyorsa o edge bridge'dir.</li>
+              <li>İki büyük parçayı tek vertex bağlıyorsa o vertex cut vertex'tir.</li>
+            </ul>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF Problem 1: iki triangle ve aradaki bağlantı</h3>
+            <p>Graph: triangle ABC, D üzerinden triangle EFG'ye bağlanıyor. Edges: AB, AC, BC, CD, DE, EF, FG, EG.</p>
+            <div class="steps">
+              <div class="step">Graph connected: ABC'den EFG'ye C-D-E üzerinden gidilir.</div>
+              <div class="step">AB, AC, BC bridge değil çünkü triangle içinde alternatif yol var.</div>
+              <div class="step">EF, FG, EG bridge değil çünkü onlar da triangle içinde.</div>
+              <div class="step">CD bridge: kaldırılırsa {A,B,C} tarafı D-E-F-G'den ayrılır.</div>
+              <div class="step">DE bridge: kaldırılırsa {A,B,C,D} ve {E,F,G} ayrılır.</div>
+              <div class="step">Cut vertices: C, D, E. D kaldırılırsa iki triangle ayrılır; C veya E kaldırılması da bağlantıyı koparır.</div>
+              <div class="step">D kaldırıldıktan sonra components: {A,B,C} ve {E,F,G}.</div>
+            </div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>2. Cycle C6 için κ ve λ</h3>
+            <p>Cycle grafikte tek vertex veya tek edge kaldırmak grafiği path yapar; path connected kalır. İki uygun vertex veya iki edge kaldırınca kopar.</p>
+            <div class="formula">C<sub>n</sub> için n≥3: κ(C<sub>n</sub>)=2 ve λ(C<sub>n</sub>)=2.</div>
+            <div class="memory">Cycle'ın zayıf noktası tek değil, iki kesme gerekir.</div>
+          </article>
+
+          <article class="example-card">
+            <h3>PDF Problem 2: C6</h3>
+            <div class="steps">
+              <div class="step">Bir vertex kaldır: cycle path'e dönüşür, hâlâ connected.</div>
+              <div class="step">İki uygun vertex kaldır: iki ayrı path parçası kalabilir. κ(G)=2.</div>
+              <div class="step">Bir edge kaldır: path olur, connected.</div>
+              <div class="step">İki edge kaldır: disconnected olabilir. λ(G)=2.</div>
+              <div class="step">Sonuç: cut vertex yok, bridge yok.</div>
+            </div>
+          </article>
+
+          <article class="lesson-card">
+            <h3>3. Directed SCC çözme</h3>
+            <p>Directed grafikte SCC bulmak için geri dönüş var mı diye bak. Tek yönde gidiş başka componente edge verir ama SCC'leri birleştirmez.</p>
+            <ul>
+              <li>A→B→C→A bir SCC'dir.</li>
+              <li>D→E→D başka SCC'dir.</li>
+              <li>C→D varsa A/B/C tarafı D/E'ye ulaşır, ama geri yoksa strong connected olmaz.</li>
+            </ul>
+          </article>
+
+          <article class="example-card full">
+            <h3>PDF Problem 3 ve 5: SCC mantığı</h3>
+            <details>
+              <summary>Problem 3: A,B,C cycle; D,E cycle; C→D</summary>
+              <div class="steps">
+                <div class="step">A,B,C birbirine ulaşır: SCC1={A,B,C}.</div>
+                <div class="step">D,E birbirine ulaşır: SCC2={D,E}.</div>
+                <div class="step">C→D olduğundan SCC1, SCC2'ye ulaşabilir.</div>
+                <div class="step">D/E'den A/B/C'ye dönüş yok. Graph strongly connected değil.</div>
+                <div class="step">Yönleri yok sayınca A-B-C-D-E tek parça olur. Weakly connected.</div>
+                <div class="step">Source veya sink vertex yoksa bile graph strong olmak zorunda değildir. Burada her vertexin in/out'u var ama SCC'ler ayrı.</div>
+              </div>
+            </details>
+            <details>
+              <summary>Problem 5: SCC condensation graph</summary>
+              <div class="steps">
+                <div class="step">1,2,3 cycle: A={1,2,3}.</div>
+                <div class="step">4,5 cycle: B={4,5}.</div>
+                <div class="step">6 tek başına SCC: C={6}. 7 tek başına SCC: D={7}.</div>
+                <div class="step">SCC'ler arası edge'ler: 3→4 verir A→B; 6→5 verir C→B; 6→7 verir C→D.</div>
+                <div class="step">Condensation graph source components: A ve C. Sink components: B ve D.</div>
+              </div>
+            </details>
+          </article>
+
+          <article class="lesson-card">
+            <h3>4. İki K4 tek vertex paylaşırsa</h3>
+            <p>K4 çok bağlı bir parçadır; her vertex diğer üç vertexe bağlıdır. İki K4 sadece x vertexinde birleşiyorsa x tüm grafiğin boğazıdır.</p>
+            <ul>
+              <li>G connected: iki taraf x üzerinden ulaşır.</li>
+              <li>x cut vertex: x gidince iki K4 parçası ayrılır.</li>
+              <li>Bridge yok: her edge K4 içinde alternatif yollara sahiptir.</li>
+              <li>κ(G)=1 çünkü x tek başına disconnect eder.</li>
+              <li>λ(G)=3 çünkü bir K4 içinde tek vertexi izole etmek için ona gelen 3 edge'i kaldırmak gerekir.</li>
+            </ul>
+          </article>
+
+          <article class="example-card">
+            <h3>Mini görsel: bridge mantığı</h3>
+            <svg class="diagram" viewBox="0 0 560 240" role="img" aria-label="Iki triangle bridge ile bagli">
+              <line class="edge" x1="120" y1="55" x2="60" y2="155"></line>
+              <line class="edge" x1="60" y1="155" x2="180" y2="155"></line>
+              <line class="edge" x1="180" y1="155" x2="120" y2="55"></line>
+              <line class="edge" x1="180" y1="155" x2="280" y2="120"></line>
+              <line class="edge" x1="280" y1="120" x2="380" y2="155"></line>
+              <line class="edge" x1="380" y1="155" x2="500" y2="155"></line>
+              <line class="edge" x1="500" y1="155" x2="440" y2="55"></line>
+              <line class="edge" x1="440" y1="55" x2="380" y2="155"></line>
+              <circle class="node" cx="120" cy="55" r="22"></circle><text x="120" y="61" text-anchor="middle">A</text>
+              <circle class="node" cx="60" cy="155" r="22"></circle><text x="60" y="161" text-anchor="middle">B</text>
+              <circle class="node" cx="180" cy="155" r="22"></circle><text x="180" y="161" text-anchor="middle">C</text>
+              <circle class="node" cx="280" cy="120" r="22"></circle><text x="280" y="126" text-anchor="middle">D</text>
+              <circle class="node" cx="380" cy="155" r="22"></circle><text x="380" y="161" text-anchor="middle">E</text>
+              <circle class="node" cx="440" cy="55" r="22"></circle><text x="440" y="61" text-anchor="middle">F</text>
+              <circle class="node" cx="500" cy="155" r="22"></circle><text x="500" y="161" text-anchor="middle">G</text>
+              <text x="230" y="95" text-anchor="middle" fill="#c95f48">CD bridge</text>
+              <text x="330" y="108" text-anchor="middle" fill="#c95f48">DE bridge</text>
+            </svg>
+          </article>
+        </div>
+      </section>
+
+      <section id="labs" class="module" data-title="interactive labs relation function route weighted graph calculator">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Mini Araçlar</div>
+            <h2>Kontrol makineleri</h2>
+            <p>Bu araçlar, PDF'deki soru tiplerini elle çözerken yaptığın kontrolleri otomatik gösterir. Sınavda aynı mantığı kağıt üstünde yapacaksın.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">relation checker</span>
+            <span class="pill">route checker</span>
+            <span class="pill">cost checker</span>
+          </div>
+        </div>
+
+        <div class="tools-grid">
+          <article class="tool">
+            <h3>Fonksiyon senaryo laboratuvarı</h3>
+            <p>PDF tarzı hazır senaryolarda domain, codomain, image, total, injective, surjective ve inverse kararını gör.</p>
+            <div class="tool-controls">
+              <button class="tool-button primary" type="button" data-function-preset="sensor">Sensor ID</button>
+              <button class="tool-button" type="button" data-function-preset="firewall">Firewall</button>
+              <button class="tool-button" type="button" data-function-preset="monitor">Monitoring</button>
+              <button class="tool-button" type="button" data-function-preset="actuator">Actuator</button>
+            </div>
+            <div id="functionResult" class="result-box"></div>
+          </article>
+
+          <article class="tool">
+            <h3>Relation özellik kontrolü</h3>
+            <p>Set A={1,2,3}. Çiftleri işaretle, özellikleri anında gör.</p>
+            <div class="tool-controls">
+              <button class="tool-button primary" type="button" data-relation-preset="leq">≤</button>
+              <button class="tool-button" type="button" data-relation-preset="lt">&lt;</button>
+              <button class="tool-button" type="button" data-relation-preset="cycle">cycle</button>
+              <button class="tool-button" type="button" data-relation-preset="equiv">equiv</button>
+              <button class="tool-button warn" type="button" data-relation-preset="clear">temizle</button>
+            </div>
+            <div id="pairGrid" class="pair-grid"></div>
+            <div id="relationResult" class="result-box"></div>
+          </article>
+
+          <article class="tool">
+            <h3>Walk, trail, path, cycle kontrolü</h3>
+            <p>Undirected graph edges: AB, AC, BC, BD, CD, DE. Örnek rota: A-B-C-B-D.</p>
+            <input id="routeInput" value="A-B-C-B-D">
+            <div class="tool-controls">
+              <button class="tool-button primary" id="checkRoute" type="button">Kontrol et</button>
+              <button class="tool-button" type="button" data-route-example="A-C-D-B">Path örneği</button>
+              <button class="tool-button" type="button" data-route-example="B-C-D-B">Cycle örneği</button>
+            </div>
+            <div id="routeResult" class="result-box"></div>
+          </article>
+
+          <article class="tool">
+            <h3>Weighted directed route cost</h3>
+            <p>Drone graph. Örnek rota: P-R-S-U-T. Yön tersse route geçersizdir.</p>
+            <input id="weightedInput" value="P-R-S-U-T">
+            <div class="tool-controls">
+              <button class="tool-button primary" id="checkWeighted" type="button">Hesapla</button>
+              <button class="tool-button" type="button" data-weight-route="P-R-T">P-R-T</button>
+              <button class="tool-button" type="button" data-weight-route="T-U-S-P">T-U-S-P</button>
+            </div>
+            <div id="weightedResult" class="result-box"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="tests" class="module" data-title="tests quiz final exam practice questions">
+        <div class="module-header">
+          <div>
+            <div class="eyebrow">Testler</div>
+            <h2>PDF örneklerinden sınav provası</h2>
+            <p>Her bölüm için mini quiz ve en sonda karma final testi var. Yanıtı kontrol edince açıklama da açılır.</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">anında sonuç</span>
+            <span class="pill">açıklamalı</span>
+            <span class="pill">karma final</span>
+          </div>
+        </div>
+
+        <div class="quiz-shell">
+          <aside class="quiz-list">
+            <button class="nav-button active quiz-tab" type="button" data-quiz="w9q"><span>Hafta 9</span><span class="week">8 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="w10q"><span>Hafta 10</span><span class="week">10 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="w11q"><span>Hafta 11</span><span class="week">8 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="w12q"><span>Hafta 12</span><span class="week">8 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="w13q"><span>Hafta 13</span><span class="week">8 soru</span></button>
+            <button class="nav-button quiz-tab" type="button" data-quiz="finalq"><span>Karma Final</span><span class="week">20 soru</span></button>
+          </aside>
+          <section class="quiz-card full">
+            <h3 id="quizTitle">Hafta 9 Quiz</h3>
+            <div class="score-line"><span id="quizScore">Henüz kontrol edilmedi</span><span id="quizCount"></span></div>
+            <div id="quizMount"></div>
+            <div class="tool-controls">
+              <button class="small-button primary" id="checkQuiz" type="button">Cevapları kontrol et</button>
+              <button class="small-button" id="resetQuiz" type="button">Seçimleri temizle</button>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const quizData = {
+      w9q: {
+        title: "Hafta 9 Quiz - Fonksiyonlar",
+        questions: [
+          {
+            q: "Bir eşleme ne zaman klasik anlamda fonksiyondur?",
+            options: ["Her output en fazla bir input alırsa", "Her input tam olarak bir output alırsa", "Codomain ile image eşitse", "Her input farklı output alırsa"],
+            a: 1,
+            exp: "Fonksiyon şartı input üzerindedir: domain'deki her eleman için var ve tek output."
+          },
+          {
+            q: "f: SensorPatterns → {Normal, Warning, Critical, Failure} ama Failure hiç üretilmiyor. Hangisi doğru?",
+            options: ["Failure codomain'den silinir", "Image codomain'den büyük olur", "Image {Normal, Warning, Critical} olur", "f fonksiyon olamaz"],
+            a: 2,
+            exp: "Codomain tasarım hedefidir; image gerçekten gelen output setidir."
+          },
+          {
+            q: "Yanlış şifrede sistem hiç cevap vermiyorsa login mapping'i nasıl sınıflanır?",
+            options: ["Total function", "Partial function", "Bijective function", "Surjective function"],
+            a: 1,
+            exp: "Bazı inputlar outputsuz kaldığı için partial."
+          },
+          {
+            q: "f(x)=1/x ifadesi R→R olarak yazılırsa ne olur?",
+            options: ["Totaldır", "0 yüzünden total değildir", "Injective değildir diye fonksiyon değildir", "Codomain yanlış olduğu için relation değildir"],
+            a: 1,
+            exp: "x=0 için output yok. Domain R\\{0} yapılırsa total olur."
+          },
+          {
+            q: "İki fonksiyonun eşit olması için hangisi tek başına yeterli değildir?",
+            options: ["Aynı domain", "Aynı codomain", "Aynı formül", "Her inputta aynı output"],
+            a: 2,
+            exp: "Aynı formül ortak inputlarda aynı çalışabilir ama domain/codomain farklıysa fonksiyonlar eşit değildir."
+          },
+          {
+            q: "f:{1,2,3,4}→{101,102,103,104}, f(x)=x+100 için doğru ifade hangisi?",
+            options: ["Injective", "Surjective değil", "Partial", "Fonksiyon değil"],
+            a: 0,
+            exp: "x1+100=x2+100 ise x1=x2. Ayrıca bu örnekte codomain de tamamen vurulur."
+          },
+          {
+            q: "f:Z→Z, f(x)=2x+3 neden Z üzerine surjective değildir?",
+            options: ["Çünkü injective değildir", "Çünkü yalnızca odd integer output üretir", "Çünkü domain sonsuzdur", "Çünkü inverse formülü yoktur"],
+            a: 1,
+            exp: "2x+3 her zaman tek sayıdır. Even integerlar codomain'de kalır ama vurulmaz."
+          },
+          {
+            q: "f(x)=3x+2, g(x)=x² ise (g∘f)(x) nedir?",
+            options: ["3x²+2", "9x²+12x+4", "3x²+12x+4", "g(x)+f(x)"],
+            a: 1,
+            exp: "Önce f: 3x+2. Sonra g bunu karesini alır: (3x+2)^2."
+          }
+        ]
+      },
+      w10q: {
+        title: "Hafta 10 Quiz - Bağıntılar",
+        questions: [
+          {
+            q: "R on A reflexive ise hangi çiftler kesin vardır?",
+            options: ["Tüm farklı çiftler", "Her a için (a,a)", "Her (a,b) için (b,a)", "Sadece bir self-pair"],
+            a: 1,
+            exp: "Reflexive için domain/set içindeki her elemanın kendisiyle ilişkisi gerekir."
+          },
+          {
+            q: "Irreflexive relation'ı bozan en küçük kanıt nedir?",
+            options: ["Bir ters çift eksikliği", "Bir self-pair bulunması", "Bir zincirin olmaması", "Codomain'in boş olması"],
+            a: 1,
+            exp: "Irreflexive hiçbir (a,a) istemez. Tek self-pair bile yeterli karşı örnektir."
+          },
+          {
+            q: "R içinde (d2,d3) var ama (d3,d2) yok. Hangi özellik kesin bozulur?",
+            options: ["Reflexive", "Symmetric", "Antisymmetric", "Irreflexive"],
+            a: 1,
+            exp: "Symmetric için her çiftin tersinin de bulunması gerekir."
+          },
+          {
+            q: "Asymmetric relation için hangisi her zaman doğrudur?",
+            options: ["Reflexive'dir", "Symmetric'tir", "Irreflexive'dir", "Total order'dır"],
+            a: 2,
+            exp: "Asymmetric relation self-pair barındıramaz; bu yüzden irreflexive olur."
+          },
+          {
+            q: "Antisymmetric relation'ı hangi durum bozar?",
+            options: ["(a,a) çiftinin bulunması", "a≠b iken (a,b) ve (b,a)'nın birlikte bulunması", "Ters çiftin eksik olması", "Relation'ın boş olması"],
+            a: 1,
+            exp: "Antisymmetric self-pair'e izin verir, ama farklı iki eleman arasında iki yönü birden istemez."
+          },
+          {
+            q: "aRb ⇔ a divides b on {1,2,4,8}. Bu relation neden antisymmetric?",
+            options: ["Çünkü hiç self-pair yok", "Çünkü a|b ve b|a ancak a=b iken olur", "Çünkü tüm çiftlerin tersi var", "Çünkü image codomain'e eşit"],
+            a: 1,
+            exp: "Pozitif integerlarda iki sayı birbirini bölüyorsa aynı sayıdır."
+          },
+          {
+            q: "Transitive kontrolünde (T1,T2) ve (T2,T3) varsa ne aranır?",
+            options: ["(T2,T1)", "(T3,T2)", "(T1,T3)", "(T3,T1)"],
+            a: 2,
+            exp: "aRb ve bRc varsa aRc gerekir."
+          },
+          {
+            q: "Equivalence relation için gereken üçlü nedir?",
+            options: ["Reflexive, symmetric, transitive", "Reflexive, antisymmetric, transitive", "Irreflexive, asymmetric, transitive", "Symmetric, antisymmetric, total"],
+            a: 0,
+            exp: "Equivalence aynı sınıfta olma fikrini modeller."
+          },
+          {
+            q: "Partial order için gereken üçlü nedir?",
+            options: ["Reflexive, symmetric, transitive", "Reflexive, antisymmetric, transitive", "Irreflexive, symmetric, transitive", "Symmetric, comparable, reflexive"],
+            a: 1,
+            exp: "Poset = reflexive + antisymmetric + transitive."
+          },
+          {
+            q: "{{1},{2}} üzerinde subset relation neden total order değildir?",
+            options: ["Reflexive olmadığı için", "Antisymmetric olmadığı için", "{1} ve {2} comparable olmadığı için", "Transitive olmadığı için"],
+            a: 2,
+            exp: "{1}⊆{2} değil, {2}⊆{1} değil. Total order'da her çift comparable olmalı."
+          }
+        ]
+      },
+      w11q: {
+        title: "Hafta 11 Quiz - Grafik Temeli",
+        questions: [
+          {
+            q: "Undirected graph için Handshaking Lemma nedir?",
+            options: ["Σdeg(v)=|E|", "Σdeg(v)=2|E|", "Σin=2Σout", "deg(v)=|V|"],
+            a: 1,
+            exp: "Her undirected edge iki vertexe incident olduğu için degree toplamına 2 katkı verir."
+          },
+          {
+            q: "Directed graph'te toplam in-degree neye eşittir?",
+            options: ["2|E|", "|V|", "|E|", "Σdegree/2"],
+            a: 2,
+            exp: "Her directed edge tam bir incoming ok ve tam bir outgoing ok üretir."
+          },
+          {
+            q: "Smart factory örneğinde deg(S3)=4 ise en connected sensor hangisidir?",
+            options: ["S1", "S2", "S3", "S5"],
+            a: 2,
+            exp: "Maksimum degree S3'tedir."
+          },
+          {
+            q: "A walk için hangi tekrarlar serbesttir?",
+            options: ["Ne vertex ne edge", "Vertex serbest edge yasak", "Vertex yasak edge serbest", "Vertex ve edge serbest"],
+            a: 3,
+            exp: "Walk en gevşek kavramdır."
+          },
+          {
+            q: "Trail neyi yasaklar?",
+            options: ["Vertex tekrarını", "Edge tekrarını", "Başlangıç bitiş aynı olmasını", "Directed edge kullanımını"],
+            a: 1,
+            exp: "Trail edge tekrarı yapmaz, ama vertex tekrar edebilir."
+          },
+          {
+            q: "A→C→D→B rotasında edge ve vertex tekrarı yoksa sınıfı nedir?",
+            options: ["Sadece walk", "Walk, trail, path", "Cycle", "Fonksiyon"],
+            a: 1,
+            exp: "Geçerli rota olduğu için walk; edge tekrarı yoksa trail; vertex tekrarı yoksa path."
+          },
+          {
+            q: "B→C→D→B için en özel doğru sınıf hangisidir?",
+            options: ["Cycle", "Sadece walk", "Path", "Not a walk"],
+            a: 0,
+            exp: "Başlangıç ve bitiş aynı, iç vertex/edge tekrarı yok."
+          },
+          {
+            q: "Filter→Encoder→Filter directed signal flow neyi gösterir?",
+            options: ["Sink vertex", "Feedback cycle", "Disconnected component", "Bridge"],
+            a: 1,
+            exp: "Directed closed route sistemde feedback döngüsü anlamına gelir."
+          }
+        ]
+      },
+      w12q: {
+        title: "Hafta 12 Quiz - Subgraph ve Bağlılık",
+        questions: [
+          {
+            q: "Induced subgraph'ta vertex setini seçince ne zorunludur?",
+            options: ["Hiç edge almamak", "Orijinal grafikte bu vertexler arasındaki tüm edge'leri almak", "Sadece bridge'leri almak", "Sadece directed edge almak"],
+            a: 1,
+            exp: "Induced subgraph tamamen vertex seti tarafından belirlenir."
+          },
+          {
+            q: "H, G'nin subgraph'ı olmak için ne gerekir?",
+            options: ["V(H)⊆V(G) ve E(H)⊆E(G)", "V(H)=V(G) zorunlu", "E(H)=E(G) zorunlu", "H connected olmalı"],
+            a: 0,
+            exp: "Subgraph için vertex ve edge setleri orijinalin alt kümesi olmalı."
+          },
+          {
+            q: "G edge'leri ab,ac,bc,bd,ce,de,ef ve S={b,c,d,e}. G[S] edge'leri hangileridir?",
+            options: ["ab,ac,ef", "bc,bd,ce,de", "bc,ce,ef", "bd,de,ef"],
+            a: 1,
+            exp: "İki ucu da S içinde olan edge'ler alınır."
+          },
+          {
+            q: "Weighted graph'te weight neyi temsil edebilir?",
+            options: ["Sadece vertex sayısını", "Cost, distance, time, resistance gibi edge değeri", "Sadece graph'ın connected olmasını", "Sadece input-output kuralını"],
+            a: 1,
+            exp: "Weight edge üstündeki sayısal maliyettir."
+          },
+          {
+            q: "Drone graph'ta P→R→S→U→T cost nedir? P→R=2, R→S=4, S→U=2, U→T=2.",
+            options: ["8", "9", "10", "12"],
+            a: 2,
+            exp: "2+4+2+2=10."
+          },
+          {
+            q: "Undirected graph connected ise ne doğrudur?",
+            options: ["Her vertex çifti arasında path vardır", "Her edge directed olur", "Hiç cycle yoktur", "Tüm degree'ler eşittir"],
+            a: 0,
+            exp: "Connectedness path ile tanımlanır."
+          },
+          {
+            q: "Cut vertex nedir?",
+            options: ["Kaldırılınca component sayısını artıran vertex", "Ağırlığı en küçük edge", "Out-degree'i 0 olan vertex", "Her path'teki son vertex"],
+            a: 0,
+            exp: "Articulation point olarak da geçer."
+          },
+          {
+            q: "Strongly connected directed graph için hangisi gerekir?",
+            options: ["Yönler yok sayılınca connected olsun", "Her vertex her vertexe directed path ile ulaşsın", "Hiç source olmasın yeter", "Her edge bridge olsun"],
+            a: 1,
+            exp: "Strong connectedness yön takip ederek iki yönlü ulaşılabilirlik ister."
+          }
+        ]
+      },
+      w13q: {
+        title: "Hafta 13 Quiz - Uygulamalar",
+        questions: [
+          {
+            q: "Triangle içindeki bir edge genelde neden bridge değildir?",
+            options: ["Çünkü edge weight'i yoktur", "Çünkü alternatif yol vardır", "Çünkü directed değildir", "Çünkü self-loop'tur"],
+            a: 1,
+            exp: "Cycle/triangle içindeki edge kaldırılınca diğer iki edge üzerinden dolaşılabilir."
+          },
+          {
+            q: "ABC triangle - D - EFG triangle yapısında bridge'ler hangileridir?",
+            options: ["AB ve EF", "CD ve DE", "AC ve EG", "BC ve FG"],
+            a: 1,
+            exp: "İki büyük parçayı bağlayan tek kenarlar CD ve DE'dir."
+          },
+          {
+            q: "Aynı yapıda D kaldırılırsa ne olur?",
+            options: ["Graph aynı kalır", "İki component oluşur: ABC ve EFG", "Tek vertex kalır", "Trianglelar complete graph olur"],
+            a: 1,
+            exp: "D aradaki bağlantının göbeğidir."
+          },
+          {
+            q: "C6 cycle graph için κ(G) nedir?",
+            options: ["0", "1", "2", "6"],
+            a: 2,
+            exp: "Tek vertex kaldırmak path bırakır; iki vertex disconnect edebilir."
+          },
+          {
+            q: "C6 için bridge var mı?",
+            options: ["Evet, her edge bridge", "Evet, sadece 12", "Hayır", "Sadece opposite edge'ler"],
+            a: 2,
+            exp: "Cycle'da tek edge kaldırmak path bırakır, graph connected kalır."
+          },
+          {
+            q: "A→B→C→A ve D→E→D, ayrıca C→D varsa graph strongly connected mi?",
+            options: ["Evet, çünkü weakly connected", "Hayır, D/E'den A/B/C'ye dönüş yok", "Evet, source yok", "Hayır, hiç SCC yok"],
+            a: 1,
+            exp: "Tek yönlü C→D iki SCC'yi birleştirmez."
+          },
+          {
+            q: "Condensation graph'ta SCC'ler A={1,2,3}, B={4,5}, C={6}, D={7}; edge'ler A→B, C→B, C→D ise source components hangileri?",
+            options: ["B ve D", "A ve C", "Sadece C", "A ve B"],
+            a: 1,
+            exp: "In-degree 0 olan SCC node'ları A ve C'dir."
+          },
+          {
+            q: "İki K4 sadece x vertexinde birleşiyorsa κ(G) kaçtır?",
+            options: ["1", "2", "3", "4"],
+            a: 0,
+            exp: "x tek başına kaldırılınca graph iki parçaya ayrılır."
+          }
+        ]
+      },
+      finalq: {
+        title: "Karma Final Testi",
+        questions: [
+          { q: "Bir packet hem safe hem malicious label alıyorsa mapping neden fonksiyon değildir?", options: ["Output yok", "Bir input iki output alıyor", "Codomain boş", "Image codomain'e eşit"], a: 1, exp: "Uniqueness bozulur." },
+          { q: "Codomain {safe,suspicious,malicious}, image {safe,suspicious}. Mapping yine fonksiyon olabilir mi?", options: ["Evet", "Hayır", "Sadece injective ise", "Sadece partial ise"], a: 0, exp: "Surjective olmayabilir ama yine fonksiyon olabilir." },
+          { q: "Surjective olmak ne demektir?", options: ["No collision", "Her codomain elemanı vurulur", "Her input farklıdır", "Domain boş değildir"], a: 1, exp: "Onto = codomain coverage." },
+          { q: "Bijective function için hangi sonuç beklenir?", options: ["Inverse function vardır", "Partial olur", "Transitive olur", "Bridge üretir"], a: 0, exp: "Bijective mapping terslenebilir." },
+          { q: "g∘f ifadesinde önce hangisi uygulanır?", options: ["g", "f", "İkisi aynı anda", "Hiçbiri"], a: 1, exp: "(g∘f)(x)=g(f(x))." },
+          { q: "Relation matrix'te m_ij=1 ne anlatır?", options: ["ai ile aj ilişkili", "ai degree 1", "R reflexive", "Graph connected"], a: 0, exp: "Matrix representation ordered pair var/yok bilgisidir." },
+          { q: "Reflexive ve irreflexive aynı relation'da A boş değilken birlikte olabilir mi?", options: ["Evet", "Hayır", "Sadece symmetric ise", "Sadece transitive ise"], a: 1, exp: "Reflexive tüm self-pair'leri ister, irreflexive hiçbirini istemez." },
+          { q: "Strictly slower than relation hangi özelliğe tipik örnektir?", options: ["Asymmetric", "Reflexive", "Symmetric", "Equivalence"], a: 0, exp: "pi pj'den yavaşsa pj pi'den yavaş olamaz." },
+          { q: "Equivalence relation seti neye böler?", options: ["Bridges", "Equivalence classes", "Degrees", "Weights"], a: 1, exp: "Aynı sınıftakiler birlikte gruplanır." },
+          { q: "Total order, partial order'a hangi ek şartı koyar?", options: ["Symmetry", "Comparability", "Irreflexivity", "Image equality"], a: 1, exp: "Her iki eleman karşılaştırılabilir olmalı." },
+          { q: "Undirected graph'te degree toplamı 18 ise edge sayısı kaçtır?", options: ["9", "18", "36", "6"], a: 0, exp: "Σdeg=2|E|, yani |E|=9." },
+          { q: "Directed graph'te source-like vertex için hangisi doğrudur?", options: ["Out-degree 0", "In-degree 0", "Degree 2", "Bridge olması"], a: 1, exp: "Source'a dışarıdan ok gelmez." },
+          { q: "Trail olup path olmayan rota nasıl görünür?", options: ["Edge tekrar eder", "Vertex tekrar eder ama edge tekrar etmez", "Hiç edge yoktur", "Her zaman closed'dur"], a: 1, exp: "Trail edge tekrarı yasaklar, vertex tekrarına izin verir." },
+          { q: "Cycle için hangisi doğrudur?", options: ["Başlangıç ve bitiş aynı, iç vertex tekrarı yok", "Her edge tekrarlanır", "Mutlaka directed olmalıdır", "Asla trail değildir"], a: 0, exp: "Cycle kapalı path mantığıdır." },
+          { q: "Subgraph induced değilse tipik sebep nedir?", options: ["Vertex seti boş", "Seçilen vertexler arasındaki bazı orijinal edge'leri düşürmüştür", "Tüm edge'leri almıştır", "Connected olmuştur"], a: 1, exp: "Induced subgraph edge düşürmeye izin vermez." },
+          { q: "P→R→T ve P→S→U→T rotalarının cost'u 9 ise ne denir?", options: ["İkisi de en iyi olabilir", "İkisi de invalid", "Sadece kısa olan geçerlidir", "Weighted graph değildir"], a: 0, exp: "Least cost eşitliği mümkündür." },
+          { q: "Weakly connected directed graph ne demektir?", options: ["Yönleri izleyerek herkes herkese ulaşır", "Yönler yok sayılınca connected olur", "Her edge çift yönlüdür", "Hiç SCC yoktur"], a: 1, exp: "Weak connectedness yönleri silince bakılır." },
+          { q: "SCC neyin kısaltmasıdır?", options: ["Shortest Cost Cycle", "Strongly Connected Component", "Single Cut Component", "Symmetric Closure Class"], a: 1, exp: "Directed graph içinde herkesin herkese ulaşabildiği maksimal parçadır." },
+          { q: "Bridge kaldırılınca ne olur?", options: ["Component sayısı artar", "Degree toplamı değişmez", "Graph complete olur", "Relation transitive olur"], a: 0, exp: "Bridge, grafiğin kopma kenarıdır." },
+          { q: "K4 içinde tek edge kaldırmak neden disconnect etmez?", options: ["K4 directed olduğu için", "Alternatif yollar bol olduğu için", "K4'te edge yoktur", "Tüm vertexler source olduğu için"], a: 1, exp: "Complete graph'ta her vertex çifti çok bağlantılıdır." }
+        ]
+      }
+    };
+
+    const functionPresets = {
+      sensor: {
+        title: "Sensor ID",
+        domain: ["S1", "S2", "S3", "S4"],
+        codomain: ["101", "102", "103", "104"],
+        map: { S1: "101", S2: "102", S3: "103", S4: "104" }
+      },
+      firewall: {
+        title: "Firewall labels",
+        domain: ["P1", "P2", "P3"],
+        codomain: ["safe", "suspicious", "malicious"],
+        map: { P1: "safe", P2: "suspicious", P3: "safe" }
+      },
+      monitor: {
+        title: "Industrial monitoring",
+        domain: ["S1", "S2", "S3", "S4", "S5"],
+        codomain: ["101", "102", "103", "104", "105", "106"],
+        map: { S1: "101", S2: "103", S3: "103", S4: "105" }
+      },
+      actuator: {
+        title: "Voltage to actuator",
+        domain: ["1", "2", "3"],
+        codomain: ["Low", "Medium", "High"],
+        map: { "1": "Low", "2": "Medium", "3": "High" }
+      }
+    };
+
+    const relationSet = ["1", "2", "3"];
+    const relationPresets = {
+      leq: ["1,1", "1,2", "1,3", "2,2", "2,3", "3,3"],
+      lt: ["1,2", "1,3", "2,3"],
+      cycle: ["1,2", "2,3", "3,1"],
+      equiv: ["1,1", "2,2", "3,3", "1,2", "2,1"],
+      clear: []
+    };
+
+    const routeEdges = new Set(["A-B", "A-C", "B-C", "B-D", "C-D", "D-E"]);
+    const weightedEdges = {
+      "P-Q": 6,
+      "P-R": 2,
+      "P-S": 5,
+      "Q-S": 3,
+      "Q-T": 4,
+      "R-S": 4,
+      "R-T": 7,
+      "S-U": 2,
+      "U-T": 2
+    };
+
+    let currentQuiz = "w9q";
+
+    function $(selector, root = document) {
+      return root.querySelector(selector);
+    }
+
+    function $$(selector, root = document) {
+      return Array.from(root.querySelectorAll(selector));
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      }[char]));
+    }
+
+    function showModule(id) {
+      $$(".module").forEach((module) => module.classList.toggle("active", module.id === id));
+      $$(".nav-button[data-target]").forEach((button) => button.classList.toggle("active", button.dataset.target === id));
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function renderQuiz(key) {
+      currentQuiz = key;
+      const quiz = quizData[key];
+      $("#quizTitle").textContent = quiz.title;
+      $("#quizScore").textContent = "Henüz kontrol edilmedi";
+      $("#quizCount").textContent = quiz.questions.length + " soru";
+      $("#quizMount").innerHTML = quiz.questions.map((item, index) => {
+        const choices = item.options.map((option, choiceIndex) => `
+          <label class="choice" data-question="${index}" data-choice="${choiceIndex}">
+            <input type="radio" name="${key}-${index}" value="${choiceIndex}">
+            <span>${escapeHtml(option)}</span>
+          </label>
+        `).join("");
+        return `
+          <article class="quiz-question" data-question="${index}">
+            <h4>${index + 1}. ${escapeHtml(item.q)}</h4>
+            ${choices}
+            <div class="feedback" id="feedback-${index}"></div>
+          </article>
+        `;
+      }).join("");
+      $$(".quiz-tab").forEach((button) => button.classList.toggle("active", button.dataset.quiz === key));
+    }
+
+    function checkQuiz() {
+      const quiz = quizData[currentQuiz];
+      let correct = 0;
+      quiz.questions.forEach((item, index) => {
+        const selected = $(`input[name="${currentQuiz}-${index}"]:checked`);
+        const selectedValue = selected ? Number(selected.value) : null;
+        const questionEl = $(`.quiz-question[data-question="${index}"]`);
+        $$(".choice", questionEl).forEach((choice) => {
+          const choiceIndex = Number(choice.dataset.choice);
+          choice.classList.toggle("correct", choiceIndex === item.a);
+          choice.classList.toggle("wrong", selectedValue === choiceIndex && choiceIndex !== item.a);
+        });
+        if (selectedValue === item.a) correct += 1;
+        const feedback = $(`#feedback-${index}`);
+        const status = selectedValue === item.a ? "Doğru." : selectedValue === null ? "Boş." : "Yanlış.";
+        feedback.innerHTML = `<strong>${status}</strong> ${escapeHtml(item.exp)}`;
+        feedback.classList.add("visible");
+      });
+      $("#quizScore").textContent = `${correct}/${quiz.questions.length} doğru`;
+      saveScore(currentQuiz, correct, quiz.questions.length);
+    }
+
+    function resetQuiz() {
+      $$(`#quizMount input[type="radio"]`).forEach((input) => { input.checked = false; });
+      $$(".choice", $("#quizMount")).forEach((choice) => choice.classList.remove("correct", "wrong"));
+      $$(".feedback", $("#quizMount")).forEach((feedback) => {
+        feedback.classList.remove("visible");
+        feedback.textContent = "";
+      });
+      $("#quizScore").textContent = "Henüz kontrol edilmedi";
+    }
+
+    function saveScore(key, correct, total) {
+      const scores = JSON.parse(localStorage.getItem("discreteScores") || "{}");
+      scores[key] = { correct, total };
+      localStorage.setItem("discreteScores", JSON.stringify(scores));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const scores = JSON.parse(localStorage.getItem("discreteScores") || "{}");
+      let correct = 0;
+      let total = 0;
+      Object.values(scores).forEach((score) => {
+        correct += score.correct;
+        total += score.total;
+      });
+      $("#progressText").textContent = `${correct}/${total}`;
+      $("#progressBar").style.width = total ? `${Math.round((correct / total) * 100)}%` : "0%";
+    }
+
+    function evaluateFunction(presetKey) {
+      const preset = functionPresets[presetKey];
+      const image = [...new Set(Object.values(preset.map))];
+      const undefinedInputs = preset.domain.filter((x) => !(x in preset.map));
+      const total = undefinedInputs.length === 0;
+      const outputs = Object.values(preset.map);
+      const injective = outputs.length === new Set(outputs).size && total;
+      const surjective = preset.codomain.every((y) => image.includes(y));
+      const bijective = total && injective && surjective;
+      const rows = preset.domain.map((x) => `<tr><td>${escapeHtml(x)}</td><td>${escapeHtml(preset.map[x] || "tanımsız")}</td></tr>`).join("");
+      $("#functionResult").innerHTML = `
+        <strong>${escapeHtml(preset.title)}</strong>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Input</th><th>Output</th></tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <p><strong>Domain:</strong> {${preset.domain.join(", ")}}</p>
+        <p><strong>Codomain:</strong> {${preset.codomain.join(", ")}}</p>
+        <p><strong>Image:</strong> {${image.join(", ") || "∅"}}</p>
+        <p><strong>Total:</strong> ${total ? "evet" : "hayır, outputsuz input: " + undefinedInputs.join(", ")}</p>
+        <p><strong>Injective:</strong> ${injective ? "evet" : "hayır"}</p>
+        <p><strong>Surjective:</strong> ${surjective ? "evet" : "hayır"}</p>
+        <p><strong>Inverse function:</strong> ${bijective ? "var, çünkü bijective" : "yok, çünkü bijective değil"}</p>
+      `;
+    }
+
+    function renderPairGrid() {
+      $("#pairGrid").innerHTML = relationSet.flatMap((a) => relationSet.map((b) => `
+        <label>
+          <input type="checkbox" value="${a},${b}">
+          (${a},${b})
+        </label>
+      `)).join("");
+      $$("#pairGrid input").forEach((input) => input.addEventListener("change", evaluateRelation));
+    }
+
+    function setRelationPreset(name) {
+      const preset = new Set(relationPresets[name]);
+      $$("#pairGrid input").forEach((input) => {
+        input.checked = preset.has(input.value);
+      });
+      evaluateRelation();
+    }
+
+    function evaluateRelation() {
+      const pairs = new Set($$("#pairGrid input:checked").map((input) => input.value));
+      const has = (a, b) => pairs.has(`${a},${b}`);
+      const reflexive = relationSet.every((a) => has(a, a));
+      const irreflexive = relationSet.every((a) => !has(a, a));
+      const symmetric = [...pairs].every((pair) => {
+        const [a, b] = pair.split(",");
+        return has(b, a);
+      });
+      const asymmetric = [...pairs].every((pair) => {
+        const [a, b] = pair.split(",");
+        return a !== b && !has(b, a);
+      });
+      const antisymmetric = relationSet.every((a) => relationSet.every((b) => a === b || !(has(a, b) && has(b, a))));
+      let transitive = true;
+      const missing = [];
+      relationSet.forEach((a) => relationSet.forEach((b) => relationSet.forEach((c) => {
+        if (has(a, b) && has(b, c) && !has(a, c)) {
+          transitive = false;
+          missing.push(`(${a},${c})`);
+        }
+      })));
+      const equivalence = reflexive && symmetric && transitive;
+      const partialOrder = reflexive && antisymmetric && transitive;
+      $("#relationResult").innerHTML = `
+        <p><strong>R:</strong> {${[...pairs].map((p) => "(" + p + ")").join(", ") || "∅"}}</p>
+        <p>Reflexive: <strong>${yesNo(reflexive)}</strong> | Irreflexive: <strong>${yesNo(irreflexive)}</strong></p>
+        <p>Symmetric: <strong>${yesNo(symmetric)}</strong> | Asymmetric: <strong>${yesNo(asymmetric)}</strong> | Antisymmetric: <strong>${yesNo(antisymmetric)}</strong></p>
+        <p>Transitive: <strong>${yesNo(transitive)}</strong>${missing.length ? " - eksik gereken çiftlerden bazıları: " + [...new Set(missing)].slice(0, 6).join(", ") : ""}</p>
+        <p>Equivalence relation: <strong>${yesNo(equivalence)}</strong> | Partial order: <strong>${yesNo(partialOrder)}</strong></p>
+      `;
+    }
+
+    function yesNo(value) {
+      return value ? "evet" : "hayır";
+    }
+
+    function parseRoute(value) {
+      return value
+        .toUpperCase()
+        .replaceAll("→", "-")
+        .split(/[\s,\-]+/)
+        .map((x) => x.trim())
+        .filter(Boolean);
+    }
+
+    function undirectedKey(a, b) {
+      return [a, b].sort().join("-");
+    }
+
+    function checkRoute() {
+      const route = parseRoute($("#routeInput").value);
+      if (route.length < 2) {
+        $("#routeResult").innerHTML = "En az iki vertex yaz.";
+        return;
+      }
+      const usedEdges = [];
+      const invalid = [];
+      for (let i = 0; i < route.length - 1; i += 1) {
+        const key = undirectedKey(route[i], route[i + 1]);
+        usedEdges.push(key);
+        if (!routeEdges.has(key)) invalid.push(`${route[i]}-${route[i + 1]}`);
+      }
+      if (invalid.length) {
+        $("#routeResult").innerHTML = `<strong>Walk değil.</strong> Geçersiz adjacency: ${invalid.join(", ")}.`;
+        return;
+      }
+      const repeatedEdges = usedEdges.length !== new Set(usedEdges).size;
+      const closed = route[0] === route[route.length - 1];
+      const vertexListForPath = closed ? route.slice(0, -1) : route;
+      const repeatedVertices = vertexListForPath.length !== new Set(vertexListForPath).size;
+      const walk = true;
+      const trail = !repeatedEdges;
+      const path = !closed && !repeatedVertices && !repeatedEdges;
+      const cycle = closed && !repeatedVertices && !repeatedEdges && route.length >= 4;
+      $("#routeResult").innerHTML = `
+        <p><strong>Route:</strong> ${route.join(" → ")}</p>
+        <p>Walk: <strong>${yesNo(walk)}</strong> | Trail: <strong>${yesNo(trail)}</strong> | Path: <strong>${yesNo(path)}</strong> | Cycle: <strong>${yesNo(cycle)}</strong></p>
+        <p>Edge tekrarı: <strong>${yesNo(repeatedEdges)}</strong> | Vertex tekrarı: <strong>${yesNo(repeatedVertices)}</strong> | Kapalı: <strong>${yesNo(closed)}</strong></p>
+      `;
+    }
+
+    function checkWeighted() {
+      const route = parseRoute($("#weightedInput").value);
+      if (route.length < 2) {
+        $("#weightedResult").innerHTML = "En az iki vertex yaz.";
+        return;
+      }
+      let total = 0;
+      const parts = [];
+      const invalid = [];
+      for (let i = 0; i < route.length - 1; i += 1) {
+        const key = `${route[i]}-${route[i + 1]}`;
+        if (!(key in weightedEdges)) {
+          invalid.push(key);
+        } else {
+          total += weightedEdges[key];
+          parts.push(`${key}=${weightedEdges[key]}`);
+        }
+      }
+      if (invalid.length) {
+        $("#weightedResult").innerHTML = `<strong>Geçersiz route.</strong> Directed edge yok: ${invalid.join(", ")}. Yön tersse aynı edge sayılmaz.`;
+        return;
+      }
+      $("#weightedResult").innerHTML = `<p><strong>Valid route:</strong> ${route.join(" → ")}</p><p>${parts.join(" + ")}</p><p><strong>Total cost:</strong> ${total}</p>`;
+    }
+
+    function searchContent() {
+      const term = $("#searchBox").value.trim().toLowerCase();
+      $$(".lesson-card, .example-card, .tool, .quiz-card").forEach((card) => {
+        if (!term) {
+          card.classList.remove("hidden-by-search");
+          return;
+        }
+        card.classList.toggle("hidden-by-search", !card.textContent.toLowerCase().includes(term));
+      });
+    }
+
+    function initNotes() {
+      const note = $("#notePad");
+      note.value = localStorage.getItem("discreteNotes") || "";
+      note.addEventListener("input", () => localStorage.setItem("discreteNotes", note.value));
+    }
+
+    function init() {
+      $$(".nav-button[data-target]").forEach((button) => {
+        button.addEventListener("click", () => showModule(button.dataset.target));
+      });
+      $$(".quiz-tab").forEach((button) => {
+        button.addEventListener("click", () => renderQuiz(button.dataset.quiz));
+      });
+      $("#checkQuiz").addEventListener("click", checkQuiz);
+      $("#resetQuiz").addEventListener("click", resetQuiz);
+      $("#searchBox").addEventListener("input", searchContent);
+      $$(".tool-button[data-function-preset]").forEach((button) => {
+        button.addEventListener("click", () => evaluateFunction(button.dataset.functionPreset));
+      });
+      $$(".tool-button[data-relation-preset]").forEach((button) => {
+        button.addEventListener("click", () => setRelationPreset(button.dataset.relationPreset));
+      });
+      $$(".tool-button[data-route-example]").forEach((button) => {
+        button.addEventListener("click", () => {
+          $("#routeInput").value = button.dataset.routeExample;
+          checkRoute();
+        });
+      });
+      $$(".tool-button[data-weight-route]").forEach((button) => {
+        button.addEventListener("click", () => {
+          $("#weightedInput").value = button.dataset.weightRoute;
+          checkWeighted();
+        });
+      });
+      $("#checkRoute").addEventListener("click", checkRoute);
+      $("#checkWeighted").addEventListener("click", checkWeighted);
+      renderPairGrid();
+      setRelationPreset("leq");
+      evaluateFunction("sensor");
+      checkRoute();
+      checkWeighted();
+      renderQuiz("w9q");
+      updateProgress();
+      initNotes();
+    }
+
+    init();
+  </script>
+</body>
+</html>
